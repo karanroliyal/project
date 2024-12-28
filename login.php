@@ -16,7 +16,19 @@
 
             <div class="col image_box"></div>
             <div class="col form_box">
+<<<<<<< HEAD
                 <form></form>
+=======
+                <div class="my-logo-container">
+                    <img src="assets/images/logo.png" alt="logo">
+                </div>
+                <h4>Log in</h4>
+                <form id="login_form">
+                    <input type="text" placeholder="Uername or email">
+                    <input type="password" placeholder="Enter your password">
+                    <button type="button">Login</button>
+                </form>
+>>>>>>> 31ec39682e499cecf99ce872b6e9dcbead73808c
             </div>
 
         </div>
