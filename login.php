@@ -1,5 +1,17 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION['email'])){
+    header("location:layout.php");
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
@@ -7,6 +19,7 @@
     <script src="assets/js/jquery.js"></script>
     <title>Login</title>
 </head>
+
 <body>
 
     <div class="login-wrapper">
@@ -16,19 +29,33 @@
 
             <div class="col image_box"></div>
             <div class="col form_box">
-<<<<<<< HEAD
-                <form></form>
-=======
                 <div class="my-logo-container">
                     <img src="assets/images/logo.png" alt="logo">
                 </div>
-                <h4>Log in</h4>
+                <h2 class="login-text">Log in</h2>
                 <form id="login_form">
-                    <input type="text" placeholder="Uername or email">
-                    <input type="password" placeholder="Enter your password">
-                    <button type="button">Login</button>
+
+                    <div>
+                        <input type="text" placeholder="Enter your email" id="emailId" name="user_email">
+                        <p id="emailErr">
+                        <p>
+                    </div>
+
+                    <div>
+                        <input type="password" placeholder="Enter your password" id="passwordId" name="user_password">
+                        <p id="passwordErr">
+                        <p>
+                    </div>
+
+                    <button type="submit" id="btn-login">Login</button>
+
+                    <div id="alert-message">
+                        <!-- <div class="alert alert-success" role="alert">
+                            A simple success alert—check it out!
+                        </div> -->
+                    </div>
+
                 </form>
->>>>>>> 31ec39682e499cecf99ce872b6e9dcbead73808c
             </div>
 
         </div>
@@ -51,4 +78,5 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/login.js"></script>
 </body>
+
 </html>
