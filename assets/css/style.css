@@ -33,7 +33,7 @@ body {
         border-radius: 20px;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         
-        .image_box {
+        .image_bx {
             border-radius: 50px 0px 0px 50px;
             background-image: url("../images/login-image.png");
             background-size: cover;
