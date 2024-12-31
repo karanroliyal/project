@@ -48,7 +48,7 @@ if (!isset($_SESSION['email'])) {
 
             </div>
             <div class="content-wrapper">
-                <h3>User master</h3>
+                <!-- <h3>User master</h3> -->
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Users</button>
@@ -64,80 +64,63 @@ if (!isset($_SESSION['email'])) {
                         <div class="user-master-all-users">
 
 
-
+                            <!-- search fileds -->
                             <form class="live-search-inputs">
 
-                                <input type="text" id="idId" class="form-control">
-                                <input type="text" id="nameId" class="form-control">
-                                <input type="text" id="phoneId" class="form-control">
-                                <input type="text" id="emailId" class="form-control">
+                                <div>
+                                    <label for="idId">Id</label>
+                                    <input  id="idId" name='id' class="form-control">
+                                </div>
+                                <div>
+                                    <label for="nameId">Name</label>
+                                    <input id="nameId" name="NAME" class="form-control">
+                                </div>
+                                <div>
+                                    <label for="phoneId">Phone</label>
+                                    <input  id="phoneId" name="phone" class="form-control" >
+                                </div>
+                                <div>
+                                    <label for="emailId">Email</label>
+                                    <input  id="emailId" name="email" class="form-control">
+                                </div>
+                                <input type="hidden" name="limit" id="limitID" value="5">
+                                <input type="hidden" name="page" id="pageId" value="1">
 
-                                <button class="btn bg-primary text-light">Search</button>
-                                <button class="btn bg-danger text-light">Reset</button>
+                                <button class="btn bg-danger text-light reset-btn">Reset</button>
 
                             </form>
 
 
+
                             <div class="all-users-data-table">
 
-                                <div class="row-and-pagination">
+                                <div class="row-and-pagination mb-3">
 
-                                    <select id="limitId">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                    </select>
+                                    <!-- limit of records -->
+                                     <div>
+                                        <label for="limitId">Number of rows : </label>
+                                         <select id="limitId">
+                                             <option value="5">5</option>
+                                             <option value="10">10</option>
+                                             <option value="15">15</option>
+                                             <option value="20">20</option>
+                                         </select>
+                                     </div>
 
-                                    <ul class="my-pagination">
-                                        <li class="active">1</li>
-                                        <li>2</li>
-                                        <li>3</li>
-                                    </ul>
+                                    <div class="my-pagination-container">
+
+                                        
+
+                                    </div>
+
 
                                 </div>
 
 
                                 <div class="table-container">
 
-                                    <table class="table table-striped">
-                                        <thead class="my-table-head">
-                                            <tr>
-                                                <th scope="col">Sno.</th>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Phone</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="my-table-body">
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>butt</td>
-                                                <td><button class="btn bg-primary text-white"><img src="assets/images/edit.svg" alt=""></button><button class="btn text-white bg-danger"><img src="assets/images/delete.svg" alt=""></button></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td><button class="btn bg-primary text-white"><img src="assets/images/edit.svg" alt=""></button><button class="btn text-white bg-danger"><img src="assets/images/delete.svg" alt=""></button></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>Bird</td>
-                                                <td>@twitter</td>
-                                                <td>@twitter</td>
-                                                <td><button class="btn bg-primary text-white"><img src="assets/images/edit.svg" alt=""></button><button class="btn text-white bg-danger"><img src="assets/images/delete.svg" alt=""></button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <!-- record of users -->
+                                    <!-- Table comeing from database  -->
 
                                 </div>
 
@@ -153,7 +136,38 @@ if (!isset($_SESSION['email'])) {
                     <!-- Add user  -->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                        <h1>Add user</h1>
+                        <div class="add-user-master">
+
+                            <form id="addUserFormData">
+
+                                <div>
+                                    <label for="user_name" class="mb-2 mt-2">Name</label>
+                                    <input type="text" name="name" id="user_name" placeholder="Enter name" class="form-control">
+                                    <small class="text-danger text-error"></small>
+                                </div>
+                                <div>
+                                    <label for="user_password" class="mb-2 mt-2">Password</label>
+                                    <input type="password" name="password" id="user_password" placeholder="Enter password" class="form-control">
+                                    <small class="text-danger password-error"></small>
+                                </div>
+                                <div>
+                                    <label for="user_phone" class="mb-2 mt-2">Phone</label>
+                                    <input type="tel" name="phone" id="user_phone" placeholder="Enter phone" class="form-control" maxlength="10">
+                                    <small class="text-danger phone-error"></small>
+                                </div>
+                                <div>
+                                    <label for="user_email" class="mb-2 mt-2">Email</label>
+                                    <input type="email" name="email" id="user_email" placeholder="Enter email" class="form-control">
+                                    <small class="text-danger email-error"></small>
+                                </div>
+
+                                <div>
+                                    <button type="button" class="btn bg-primary text-light mt-4">Add User</button>
+                                </div>
+
+                            </form>
+
+                        </div>
 
                     </div>
 

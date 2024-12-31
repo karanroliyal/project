@@ -1,0 +1,51 @@
+-- table for user master 
+
+USE myproject;
+
+CREATE TABLE user_master(
+id INT AUTO_INCREMENT ,
+NAME VARCHAR(30),
+phone INT,
+email VARCHAR(30) UNIQUE,
+PRIMARY KEY(id)
+);
+
+INSERT INTO user_master
+VALUES
+(NULL, "karan rawat" , 8368145192 , "karan@gmail.com"),
+(NULL, "saurav yadav" , 6435345591 , "saurav@gmail.com"),
+(NULL, "harsh sharma" , 4313145987 , "harsh@gmail.com"),
+(NULL, "kiran bisht" , 9678145245 , "kiran@gmail.com"),
+(NULL, "riya pandey" , 7489327564 , "riya@gmail.com"),
+(NULL, "jatin rawat" , 0755556737 , "jatin@gmail.com"),
+(NULL, "tarun verma" , 2222254354 , "tarun@gmail.com"),
+(NULL, "lucky kumar" , 6547145192 , "lucky@gmail.com"),
+(NULL, "hardik baala" , 1234321234 , "hardik@gmail.com"),
+(NULL, "akansha rawat" , 7689045634 , "akansha@gmail.com"),
+(NULL, "tushar pandey" , 9089763425 , "tushar@gmail.com");
+
+
+
+ALTER TABLE user_master
+MODIFY phone VARCHAR(10);
+
+SELECT Phone FROM user_master;
+
+SELECT COUNT(*) AS numbers FROM user_master;
+
+
+
+SELECT * from user_master where id LIKE '%1%' and NAME LIKE '%%' and phone like '%%' and email like '%%' ;
+
+
+
+
+
+
+
+
+
+
+
+
+
