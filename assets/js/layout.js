@@ -16,7 +16,7 @@ $(document).ready(function() {
         if(regText.test(value)){
             $(".text-error").text("");
         }else if(value == ''){
-            $(".text-error").text("");
+            $(".text-error").text("field is rewuired");
         }
         else if(value.length < 3){
             $(".text-error").text("name should be greater than or equals to 3 words");

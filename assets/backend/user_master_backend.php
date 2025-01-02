@@ -116,11 +116,11 @@ if ($result->num_rows > 0) {
     <thead class='my-table-head bg-primary text-white'>
         <tr>
             <th>S no.</th>
-            <th class='idSort changeMyImageOnSort'>Id <img src='assets/images/up.svg'></th>
-            <th class='nameSort changeMyImageOnSort'>Name <img src='assets/images/up.svg'></th>
-            <th class='phoneSort changeMyImageOnSort'>Phone <img src='assets/images/up.svg'></th>
-            <th class='emailSort changeMyImageOnSort'>Email <img src='assets/images/up.svg'></th>
-            <th class='text-center'>Action</th>
+            <th class='idSort changeMyImageOnSort'>Id <i class='bi bi-sort-numeric-up-alt'></i></th>
+            <th class='nameSort changeMyImageOnSort'>Name <i class='bi bi-sort-alpha-up'></i></th>
+            <th class='phoneSort changeMyImageOnSort'>Phone <i class='bi bi-sort-numeric-up-alt'></i></th>
+            <th class='emailSort changeMyImageOnSort'>Email <i class='bi bi-sort-alpha-up'></i></th>
+            <th class='text-center'>Action <i class='bi bi-activity'></i></th>
         </tr>
     </thead>
     <tbody>";
@@ -138,8 +138,8 @@ if ($result->num_rows > 0) {
         <td>{$row['phone']}</td>
         <td>{$row['email']}</td>
         <td class='action-td'>
-        <button class='btn bg-primary'><img src='assets/images/edit.svg'></button>
-        <button class='btn bg-danger'><img src='assets/images/delete.svg'></button>
+        <button class='btn bg-primary'><i class='bi bi-pencil-square text-light'></i></button>
+        <button class='btn bg-danger'><i class='bi bi-trash text-light'></i></button>
         </td>
     </tr>";
         $sno++;

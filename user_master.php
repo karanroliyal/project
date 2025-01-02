@@ -14,9 +14,11 @@ if (!isset($_SESSION['email'])) {
 <html lang="en">
 
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="assets/js/jquery.js"></script>
     <title>User Master</title>
 </head>
@@ -140,6 +142,8 @@ if (!isset($_SESSION['email'])) {
 
                             <form id="addUserFormData">
 
+                            <div class="row">
+
                                 <div>
                                     <label for="user_name" class="mb-2 mt-2">Name</label>
                                     <input type="text" name="name" id="user_name" placeholder="Enter name" class="form-control">
@@ -150,6 +154,7 @@ if (!isset($_SESSION['email'])) {
                                     <input type="password" name="password" id="user_password" placeholder="Enter password" class="form-control">
                                     <small class="text-danger password-error"></small>
                                 </div>
+
                                 <div>
                                     <label for="user_phone" class="mb-2 mt-2">Phone</label>
                                     <input type="tel" name="phone" id="user_phone" placeholder="Enter phone" class="form-control" maxlength="10">
@@ -160,6 +165,8 @@ if (!isset($_SESSION['email'])) {
                                     <input type="email" name="email" id="user_email" placeholder="Enter email" class="form-control">
                                     <small class="text-danger email-error"></small>
                                 </div>
+
+                            </div>
 
                                 <div>
                                     <button type="button" class="btn bg-primary text-light mt-4">Add User</button>
