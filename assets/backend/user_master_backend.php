@@ -68,31 +68,16 @@ if(isset($_POST['email'])){
     }
 }
 
-// $liveSearch = ["$email" => 'email', "$id" => 'id', "$phone" => 'phone', "$email" => 'email', "$name" => 'name'];
 
-
-// foreach ($liveSearch as $key => $value) {
-//     $jaddu = '';
-
-
-//     if (isset($_POST["{$value}"])) {
-//         if (empty($_POST["{$value}"])) {
-//             $jaddu = "";
-//         } else {
-//             $jaddu = $_POST["{$value}"];
-
-//         }
-//     }
-// }
-
-// Sort id 
 $sortId = "";
 
 if(isset($_POST['sort'])){
-    $sortId = "order by {$_POST['sortIN']} {$_POST['sort']}";
-}
-else{
-    $sortId = "";
+    if(empty($_POST['sort'])){
+        $sortId = "";
+    }
+    else{
+        $sortId = "order by {$_POST['sortIN']} {$_POST['sort']}";
+    }
 }
 
 // Offset of data
@@ -116,11 +101,11 @@ if ($result->num_rows > 0) {
     <thead class='my-table-head bg-primary text-white'>
         <tr>
             <th>S no.</th>
-            <th class='idSort changeMyImageOnSort'>Id <i class='bi bi-sort-numeric-up-alt'></i></th>
-            <th class='nameSort changeMyImageOnSort'>Name <i class='bi bi-sort-alpha-up'></i></th>
-            <th class='phoneSort changeMyImageOnSort'>Phone <i class='bi bi-sort-numeric-up-alt'></i></th>
-            <th class='emailSort changeMyImageOnSort'>Email <i class='bi bi-sort-alpha-up'></i></th>
-            <th class='text-center'>Action <i class='bi bi-activity'></i></th>
+            <th class='idSort changeMyImageOnSort'>Id <i class='bi bi-arrow-down-up'></i></th>
+            <th class='nameSort changeMyImageOnSort'>Name <i class='bi bi-arrow-down-up'></i></th>
+            <th class='phoneSort changeMyImageOnSort'>Phone <i class='bi bi-arrow-down-up'></i></th>
+            <th class='emailSort changeMyImageOnSort'>Email <i class='bi bi-arrow-down-up'></i></th>
+            <th class='text-center'>Action</th>
         </tr>
     </thead>
     <tbody>";
@@ -138,8 +123,8 @@ if ($result->num_rows > 0) {
         <td>{$row['phone']}</td>
         <td>{$row['email']}</td>
         <td class='action-td'>
-        <button class='btn bg-primary'><i class='bi bi-pencil-square text-light'></i></button>
-        <button class='btn bg-danger'><i class='bi bi-trash text-light'></i></button>
+        <button class='btn bg-primary user-edit-btn' id='{$row['id']}'><i class='bi bi-pencil-square text-light'></i></button>
+        <button class='btn bg-danger user-delete-btn' id='{$row['id']}'><i class='bi bi-trash text-light'></i></button>
         </td>
     </tr>";
         $sno++;
