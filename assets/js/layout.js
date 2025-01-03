@@ -93,13 +93,13 @@ $(document).ready(function () {
             }
 
         })
-        fieldsData.map(ele => {
+        // fieldsData.map(ele => {
 
-            if($(ele.errId).text() == ""){
-                checkForm = 0;
-            }
+        //     if($(ele.errId).text() == ""){
+        //         checkForm = 0;
+        //     }
 
-        })
+        // })
 
         if (checkForm == 1) {
 
@@ -160,6 +160,9 @@ $(document).ready(function () {
 
 
     })
+
+
+    
 
 
 

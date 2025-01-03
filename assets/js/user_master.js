@@ -168,10 +168,10 @@ $(document).ready(function () {
     });
   });
 
-//   $(".user-update-btn").on('click' , function() {
+  $("#nav-home-tab").on('click' , function() {
 
-//     console.log("i am working for update")
+    loadTable();
 
-//   })
+  })
 
 });

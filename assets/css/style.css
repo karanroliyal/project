@@ -10,22 +10,22 @@
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 html,
 body {
@@ -195,7 +195,15 @@ body {
                 .sidebar-button-container {
                     display: flex;
                     flex-direction: column;
-                    gap: 30px;
+
+                    .sidebar-cont {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 25px;
+                    }
+                    .sidebar-logout-btn{
+                        margin-right: auto;
+                    }
 
                     .sidebar-btn {
                         border: none;
@@ -334,9 +342,11 @@ body {
                     align-items: center;
                     gap: 10px;
                 }
-                .my-table-head{
+
+                .my-table-head {
                     border-radius: 10px 10px 0px 0px;
-                    tr th img{
+
+                    tr th img {
                         width: 13px;
                     }
                 }
@@ -382,11 +392,11 @@ body {
 }
 
 
-.add-user-master{
+.add-user-master {
 
     padding: 20px 0px;
 
-    .Form-submition-success-message{
+    .Form-submition-success-message {
         position: absolute;
         top: 20px;
         right: 20px;

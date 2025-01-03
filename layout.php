@@ -23,9 +23,6 @@ if (!isset($_SESSION['email'])) {
 
 <body>
 
-    <!-- <h1>I am layout</h1>
-
-    <a id="logout-btn" href="logout.php" >Logout</a> -->
 
 
     <div class="layout-wrapper">
