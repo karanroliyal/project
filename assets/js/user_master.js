@@ -19,13 +19,21 @@ $(document).ready(function () {
       success: function (data) {
         data = JSON.parse(data);
         console.log(data);
-        $(".table-container").html(data.table);
+        $(".my-table-body").html(data.table);
         $(".my-pagination-container").html(data.pagination);
       },
     });
   }
 
-  loadTable();
+  let sortOnId = $("#sortOnId").val();
+  let sortTypeId = $("#sortTypeId").val();
+  let id = $("#idId").val();
+  let name_ = $("#nameId").val();
+  let phone = $("#phoneId").val();
+  let email = $("#emailId").val();
+  let limit = $("#limitData").val();
+  let page = $("#pageId").val();
+  loadTable(limit, page, id, name_, phone, email, sortTypeId, sortOnId);
 
   // Limit the number of record
   $("#limitId").on("input", function () {
@@ -87,7 +95,7 @@ $(document).ready(function () {
       let page = $("#pageId").val();
       // let page = $(document).on('.my-pagination li').attr("id");
 
-      loadTable(limit, page, id, name_, phone, email);
+      loadTable(limit, undefined, id, name_, phone, email);
     });
   });
 
@@ -163,15 +171,251 @@ $(document).ready(function () {
         $("#user_name").val(data.Name);
         $("#user_phone").val(data.phone);
         $("#user_email").val(data.email);
-        $(".user-update-btn").text("Update User")
+        $("#sendId").val(myId);
+        $("#user-master-submit-btn").hide();
+        $("#user-master-update-btn").show();
       },
     });
   });
 
-  $("#nav-home-tab").on('click' , function() {
+  let fields = [
+    {
+      id: "#user_name",
+      errId: ".name-error",
+    },
+    {
+      id: "#user_email",
+      errId: ".email-error",
+    },
+    {
+      id: "#user_phone",
+      errId: ".phone-error",
+    },
+  ];
 
-    loadTable();
+  // update user btn
+
+  $("#user-master-update-btn").on("click", function () {
+
+    let checkForm = 1;
+
+    let formData = new FormData(addUserFormData);
+
+    fields.map((ele) => {
+
+      if ($(ele.id).val().trim() == "") {
+
+        $(ele.errId).text("field is required");
+        checkForm = 0;
+
+      };
+
+      if (checkForm == 1) {
+
+        $.ajax({
+
+          url: "assets/backend/user_master_update.php",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            data = JSON.parse(data); // parsing json into object
+
+            console.log("this i am getting in ajax : ", data);
+
+            // when every this is ok in form
+            if (data.success == 1) {
+              console.log("Form submited successfully");
+              console.log("i am error : " + data.error);
+              $(".Form-submition-success-message .alert-success").text(
+                "User Updated Successfully"
+              );
+              $(".Form-submition-success-message").slideDown("slow");
+              setTimeout(function () {
+                $(".Form-submition-success-message").slideUp("slow");
+              }, 4000);
+              $("#addUserFormData").trigger("reset");
+              let change = $("#nav-home-tab");
+
+              let tab = new bootstrap.Tab(change);
+              tab.show();
+              let sortOnId = $("#sortOnId").val();
+              let sortTypeId = $("#sortTypeId").val();
+              let id = $("#idId").val();
+              let name_ = $("#nameId").val();
+              let phone = $("#phoneId").val();
+              let email = $("#emailId").val();
+              let limit = $("#limitData").val();
+              let page = $("#pageId").val();
+              loadTable(limit, page, id, name_, phone, email, sortTypeId, sortOnId);
+            }
+            // email duplicate
+            else if (data.duplicate.length > 0) {
+              $(".email-error").text("Email already exist");
+            }
+            // when any field is empty
+            else if (data.required > 0) {
+              data.required.forEach((ele) => {
+                $("." + ele + "-error").text("Field is required");
+              });
+            }
+            // when field is not valid
+            else if (data.valid.length > 0) {
+              data.valid.forEach((ele) => {
+                if (ele == "name") {
+                  $("." + ele + "-error").text(
+                    "Only characters are allowed and name must be longer that 2 characters"
+                  );
+                }
+                if (ele == "password") {
+                  $("." + ele + "-error").text(
+                    "1 Uppercase , 1 special character , min length 8 is required and max length is 15"
+                  );
+                }
+                if (ele == "email") {
+                  $("." + ele + "-error").text("Invaid email");
+                }
+                if (ele == "phone") {
+                  $("." + ele + "-error").text("Invaid phone number");
+                }
+              });
+            }
+          }
+
+        })
+
+      }
+
+
+    });
+
+  });
+
+  // loading table and clearing form fields when clicking on home page
+  $("#nav-home-tab").on("click", function () {
+
+    let sortOnId = $("#sortOnId").val();
+    let sortTypeId = $("#sortTypeId").val();
+    let id = $("#idId").val();
+    let name_ = $("#nameId").val();
+    let phone = $("#phoneId").val();
+    let email = $("#emailId").val();
+    let limit = $("#limitData").val();
+    let page = $("#pageId").val();
+    loadTable(limit, page, id, name_, phone, email, sortTypeId, sortOnId);
+    $("#addUserFormData").trigger("reset");
+
+  });
+
+  // Changing sort icon on click
+
+  $(".changeMyImageOnSort").on('click', function () {
+
+    let icon = $(this).find("i");
+
+    if($(".changeMyImageOnSort").find("i").hasClass('bi-arrow-up')){
+
+      $(".changeMyImageOnSort").find("i").removeClass('bi-arrow-up');
+      icon.addClass('bi-arrow-up')
+
+    }
+    else if($(".changeMyImageOnSort").find("i").hasClass('bi-arrow-down')){
+
+      $(".changeMyImageOnSort").find("i").removeClass('bi-arrow-down');
+      icon.addClass('bi-arrow-down')
+
+    }
+
+    if(icon.hasClass('')){
+      icon.addClass('bi-arrow-up');
+    }
+    else if (icon.hasClass('bi-arrow-up')) {
+      icon.removeClass('bi-arrow-up').addClass('bi-arrow-down');
+    } 
+    else {
+      icon.removeClass('bi-arrow-down').addClass('bi-arrow-up');
+    }
 
   })
+
+  
+  // User master form submission
+
+  $("#user-master-submit-btn").on("click", function () {
+    let formData = new FormData(addUserFormData);
+
+    let checkForm = 1;
+
+    fieldsData.map((ele) => {
+      if ($(ele.id).val().trim() == "") {
+        $(ele.errId).text("field is required");
+        checkForm = 0;
+      }
+    });
+
+    if (checkForm == 1) {
+      $.ajax({
+        url: "assets/backend/user_master_form.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          data = JSON.parse(data); // parsing json into object
+
+          console.log("this i am getting in ajax : ", data);
+
+          // when every this is ok in form
+          if (data.success == 1) {
+            console.log("Form submited successfully");
+            $("#addUserFormData").trigger("reset");
+            $(".Form-submition-success-message .alert-success").text(
+              "User Added Successfully"
+            );
+            $(".Form-submition-success-message").slideDown("slow");
+            setTimeout(function () {
+              $(".Form-submition-success-message").slideUp("slow");
+            }, 4000);
+          }
+          // email duplicate
+          else if (data.duplicate.length > 0) {
+            $(".email-error").text("Email already exist");
+          }
+          // when field is not valid
+          else if (data.valid.length > 0) {
+            data.valid.forEach((ele) => {
+              if (ele == "name") {
+                $("." + ele + "-error").text(
+                  "Only characters are allowed and name must be longer that 2 characters"
+                );
+              }
+              if (ele == "password") {
+                $("." + ele + "-error").text(
+                  "1 Uppercase , 1 special character , min length 8 is required and max length is 15"
+                );
+              }
+              if (ele == "email") {
+                $("." + ele + "-error").text("Invaid email");
+              }
+              if (ele == "phone") {
+                $("." + ele + "-error").text("Invaid phone number");
+              }
+            });
+          }
+          // when any field is empty
+          else {
+            data.required.forEach((ele) => {
+              $("." + ele + "-error").text("Field is required");
+            });
+          }
+        },
+      });
+    }
+  });
+
+
+
+
 
 });

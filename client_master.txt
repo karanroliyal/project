@@ -1,0 +1,52 @@
+-- client master table 
+
+USE myproject;
+
+CREATE TABLE client_master(
+id INT AUTO_INCREMENT ,
+NAME VARCHAR(30) ,
+phone BIGINT ,
+email VARCHAR(100),
+address VARCHAR(100),
+state VARCHAR(50),
+district VARCHAR(100),
+pincode INT(6),
+PRIMARY KEY(id)
+);
+
+
+
+
+INSERT INTO client_master 
+VALUES
+(NULL , "karan rawat" , 8368145192 , "karan.rawat@gmail.com", "322-b , shakti khand 1" , "uttarpardesh" , "ghaziabad" , 201014),
+(NULL , "sid kumar" , 9162145192 , "sid.kumar@gmail.com", "112-g siddharth vihar" , "uttarpardesh" , "ghaziabad" , 819128),
+(NULL , "harsh sharma" , 7685145192 , "harsh.sharma@yahoo.com", "65-a , niti khand 1" , "delhi" , "vashundhara" , 918102),
+(NULL , "karan rawat" , 8101820182 , "karan.rawat@outlook.com", "111 , near dlf" , "himachal" , "silong" , 839274),
+(NULL , "priya patel" , 9821345678 , "priya.patel@example.com", "45-c, shiv nagar" , "gujarat" , "ahmedabad" , 380015),
+(NULL , "alok yadav" , 9812345679 , "alok.yadav@example.com", "89-b, sector 12" , "rajasthan" , "jaipur" , 302001),
+(NULL , "neha chauhan" , 9815876342 , "neha.chauhan@example.com", "23, vikas marg" , "punjab" , "ludhiana" , 141001),
+(NULL , "sunil kumar" , 9923456789 , "sunil.kumar@example.com", "67-a, new colony" , "haryana" , "faridabad" , 121005),
+(NULL , "ravi shankar" , 9934156780 , "ravi.shankar@example.com", "9, kailashpuri" , "uttarakhand" , "dehradun" , 248001),
+(NULL , "deepak singh" , 9876543210 , "deepak.singh@example.com", "101-b, amrapali village" , "bihar" , "patna" , 800001),
+(NULL , "manoj kumar" , 9847561324 , "manoj.kumar@example.com", "59-c, sunil market" , "madhya pradesh" , "indore" , 452001),
+(NULL , "rakhi verma" , 9713564789 , "rakhi.verma@example.com", "12-a, gautam budh nagar" , "up" , "noida" , 201301),
+(NULL , "sandeep chauhan" , 9901122334 , "sandeep.chauhan@example.com", "2, swarnim vihar" , "maharashtra" , "mumbai" , 400001),
+(NULL , "deepa rani" , 9012345678 , "deepa.rani@example.com", "101-a, gandhi nagar" , "kerala" , "kochi" , 682001),
+(NULL , "ajay kumar" , 9956346789 , "ajay.kumar@example.com", "34-b, green park" , "delhi" , "new delhi" , 110016),
+(NULL , "manish kumar" , 8887654321 , "manish.kumar@example.com", "78-a, dindayal nagar" , "up" , "kanpur" , 208001),
+(NULL , "sakshi mehra" , 9908765432 , "sakshi.mehra@example.com", "56-c, sai ram complex" , "west bengal" , "kolkata" , 700001),
+(NULL , "mohan singh" , 9975321789 , "mohan.singh@example.com", "67, new rani bagh" , "andhra pradesh" , "hyderabad" , 500001),
+(NULL , "geeta sharma" , 9932145670 , "geeta.sharma@example.com", "22-b, sector 5" , "tamil nadu" , "chennai" , 600001),
+(NULL , "vikram rathi" , 9456732180 , "vikram.rathi@example.com", "38-c, vijay nagar" , "goa" , "panaji" , 403001),
+(NULL , "rohit sharma" , 9954123456 , "rohit.sharma@example.com", "112, rama vihar" , "odisha" , "bhubaneswar" , 751001),
+(NULL , "shweta singh" , 9856432178 , "shweta.singh@example.com", "90-a, park street" , "karnataka" , "bangalore" , 560001),
+(NULL , "sushant kumar" , 9912345674 , "sushant.kumar@example.com", "44-b, shiv mandir road" , "jharkhand" , "ranchi" , 834001),
+(NULL , "komal yadav" , 9876123456 , "komal.yadav@example.com", "31, gurugram road" , "assam" , "guwahati" , 781001),
+(NULL , "pradeep singh" , 9912346789 , "pradeep.singh@example.com", "56-c, rajiv gandhi colony" , "chhattisgarh" , "raipur" , 492001),
+(NULL , "kiran kumar" , 9956382498 , "kiran.kumar@example.com", "120-a, dharamshala" , "telangana" , "hyderabad" , 500074),
+(NULL , "akshay gupta" , 9876758492 , "akshay.gupta@example.com", "212, sai shakti" , "bihar" , "patna" , 800020),
+(NULL , "pradeep kumar" , 9564237810 , "pradeep.kumar@example.com", "101, sunil nagar" , "kerala" , "thiruvananthapuram" , 695014),
+(NULL , "divya mehta" , 9664237810 , "divya.mehta@example.com", "45-b, shiv nagar" , "maharashtra" , "pune" , 411014);
+
+
