@@ -127,10 +127,10 @@ if (!isset($_SESSION['email'])) {
                                         <thead class='my-table-head bg-primary text-white'>
                                             <tr>
                                                 <th>S no.</th>
-                                                <th class='idSort changeMyImageOnSort'>Id <i class=''></th>
-                                                <th class='nameSort changeMyImageOnSort'>Name <i class=''></i></th>
-                                                <th class='phoneSort changeMyImageOnSort'>Phone <i class=''></i> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Email <i class=''> </th>
+                                                <th class='idSort changeMyImageOnSort'>Id <i class='bi-arrow-down-up'></th>
+                                                <th class='nameSort changeMyImageOnSort'>Name <i class='bi-arrow-down-up'></i></th>
+                                                <th class='phoneSort changeMyImageOnSort'>Phone <i class='bi-arrow-down-up'></i> </th>
+                                                <th class='emailSort changeMyImageOnSort'>Email <i class='bi-arrow-down-up'> </th>
                                                 <th class='text-center'>Action</th>
                                             </tr>
                                         </thead>
@@ -173,7 +173,7 @@ if (!isset($_SESSION['email'])) {
                                     </div>
                                     <div>
                                         <label for="user_password" class="mb-2 mt-2">Password</label>
-                                        <input type="password" name="password" id="user_password" placeholder="Enter password" class="form-control" maxlength="15">
+                                        <input type="password" name="password" id="user_password" placeholder="Enter password" class="form-control" maxlength="15" >
                                         <small class="text-danger password-error"></small>
                                     </div>
 

@@ -33,12 +33,10 @@ $(document).ready(function () {
         "Only characters are allowed and name must be longer that 2 characters",
     },
     {
-      id: "#user_password",
-      regexp:
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/,
-      errId: ".password-error",
-      errText:
-        "1 Uppercase , 1 special character , min length 8 is required and max length is 15",
+      id: "#user_phone",
+      regexp: /^[0-9]{10}$/,
+      errId: ".phone-error",
+      errText: "Invaid phone number",
     },
     {
       id: "#user_email",
@@ -47,10 +45,36 @@ $(document).ready(function () {
       errText: "Invaid email",
     },
     {
-      id: "#user_phone",
-      regexp: /^[0-9]{10}$/,
-      errId: ".phone-error",
-      errText: "Invaid phone number",
+      id: "#user_password",
+      regexp:
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/,
+      errId: ".password-error",
+      errText:
+        "1 Uppercase , 1 special character , min length 8 is required and max length is 15",
+    },
+    {
+      id: "#user_address",
+      regexp: /^[a-zA-Z0-9\s,'-]+$/,
+      errId: ".address-error",
+      errText: "Invaid address",
+    },
+    {
+      id: "#user_pincode",
+      regexp: /^[0-9]{6}$/,
+      errId: ".pincode-error",
+      errText: "Invaid pincode",
+    },
+    {
+      id: "#user_state",
+      regexp: /^[a-zA-Z]$/,
+      errId: ".state-error",
+      errText: "",
+    },
+    {
+      id: "#user_district",
+      regexp: /^[a-zA-Z]$/,
+      errId: ".district-error",
+      errText: "",
     },
   ];
 
@@ -71,7 +95,7 @@ $(document).ready(function () {
     });
   });
 
-  
+
 
 
 

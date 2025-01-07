@@ -414,37 +414,6 @@ body {
             }
 
 
-            /* client mast body  */
-            .my-client-table-body  tr td:nth-child(1){
-                width: 5%;
-            }
-            .my-client-table-body  tr td:nth-child(2){
-                width: 6%;
-            }
-            .my-client-table-body  tr td:nth-child(3){
-                width: 13%;
-            }
-            .my-client-table-body  tr td:nth-child(4){
-                width: 13%;
-            }
-            .my-client-table-body  tr td:nth-child(5){
-                width: 13%;
-            }
-            .my-client-table-body  tr td:nth-child(6){
-                width: 20%;
-            }
-            .my-client-table-body  tr td:nth-child(7){
-                width: 13%;
-            }
-            .my-client-table-body  tr td:nth-child(8){
-                width: 13%;
-            }
-            .my-client-table-body  tr td:nth-child(9){
-                width: 8%;
-            }
-            .my-client-table-body  tr td:nth-child(10){
-                width: 100%;
-            }
 
             .my-table-body tr th,
             td {

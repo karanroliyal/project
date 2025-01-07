@@ -194,7 +194,6 @@ $(document).ready(function () {
   ];
 
   // update user btn
-
   $("#user-master-update-btn").on("click", function () {
 
     let checkForm = 1;
@@ -227,7 +226,7 @@ $(document).ready(function () {
             // when every this is ok in form
             if (data.success == 1) {
               console.log("Form submited successfully");
-              console.log("i am error : " + data.error);
+              // console.log("i am error : " + data.error);
               $(".Form-submition-success-message .alert-success").text(
                 "User Updated Successfully"
               );
@@ -251,8 +250,12 @@ $(document).ready(function () {
               loadTable(limit, page, id, name_, phone, email, sortTypeId, sortOnId);
             }
             // email duplicate
-            else if (data.duplicate.length > 0) {
+            else if (data.duplicateEmail.length > 0) {
               $(".email-error").text("Email already exist");
+            }
+            // duplicate phone
+            if (data.duplicatePhone.length > 0) {
+              $(".phone-error").text("Phone already exist");
             }
             // when any field is empty
             else if (data.required > 0) {
@@ -314,32 +317,34 @@ $(document).ready(function () {
 
     let icon = $(this).find("i");
 
-    if($(".changeMyImageOnSort").find("i").hasClass('bi-arrow-up')){
+    if ($(".changeMyImageOnSort").find("i").hasClass('bi-arrow-up')) {
 
       $(".changeMyImageOnSort").find("i").removeClass('bi-arrow-up');
       icon.addClass('bi-arrow-up')
 
     }
-    else if($(".changeMyImageOnSort").find("i").hasClass('bi-arrow-down')){
+    else if ($(".changeMyImageOnSort").find("i").hasClass('bi-arrow-down')) {
 
       $(".changeMyImageOnSort").find("i").removeClass('bi-arrow-down');
       icon.addClass('bi-arrow-down')
 
     }
 
-    if(icon.hasClass('')){
+    if (icon.hasClass('')) {
       icon.addClass('bi-arrow-up');
     }
     else if (icon.hasClass('bi-arrow-up')) {
       icon.removeClass('bi-arrow-up').addClass('bi-arrow-down');
-    } 
+    }
     else {
       icon.removeClass('bi-arrow-down').addClass('bi-arrow-up');
     }
 
   })
 
-  
+
+
+
   // User master form submission
 
   $("#user-master-submit-btn").on("click", function () {
@@ -348,11 +353,22 @@ $(document).ready(function () {
     let checkForm = 1;
 
     fieldsData.map((ele) => {
-      if ($(ele.id).val().trim() == "") {
-        $(ele.errId).text("field is required");
-        checkForm = 0;
+      let value = $(ele.id).val();
+
+
+      if (value == undefined) {
+
       }
+      else {
+        if ($(ele.id).val().trim() == "") {
+          $(ele.errId).text("field is required");
+          checkForm = 0;
+        }
+      }
+
     });
+
+
 
     if (checkForm == 1) {
       $.ajax({
@@ -379,8 +395,12 @@ $(document).ready(function () {
             }, 4000);
           }
           // email duplicate
-          else if (data.duplicate.length > 0) {
+          else if (data.duplicateEmail.length > 0) {
             $(".email-error").text("Email already exist");
+          }
+          // duplicate phone
+          if (data.duplicatePhone.length > 0) {
+            $(".phone-error").text("Phone already exist");
           }
           // when field is not valid
           else if (data.valid.length > 0) {

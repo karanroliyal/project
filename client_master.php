@@ -140,22 +140,17 @@ if (!isset($_SESSION['email'])) {
                                         <thead class='my-client-table-head bg-primary text-white'>
                                             <tr>
                                                 <th>S no.</th>
-                                                <th class='idSort changeMyImageOnSort'>Id <i class=''></th>
-                                                <th class='nameSort changeMyImageOnSort'>Name <i class=''></i></th>
-                                                <th class='phoneSort changeMyImageOnSort'>Phone <i class=''></i> </th>
-                                                <th class='phoneSort changeMyImageOnSort'>Email <i class=''></i> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Address <i class=''> </th>
-                                                <th class='emailSort changeMyImageOnSort'>State <i class=''> </th>
-                                                <th class='emailSort changeMyImageOnSort'>District <i class=''> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Pincode <i class=''> </th>
+                                                <th class='idSort changeMyImageOnSort'>Id <i class='bi-arrow-down-up'></th>
+                                                <th class='nameSort changeMyImageOnSort'>Name <i class='bi-arrow-down-up'></i></th>
+                                                <th class='phoneSort changeMyImageOnSort'>Phone <i class='bi-arrow-down-up'></i> </th>
+                                                <th class='phoneSort changeMyImageOnSort'>Email <i class='bi-arrow-down-up'></i> </th>
+                                                <th class='emailSort changeMyImageOnSort'>Address <i class='bi-arrow-down-up'> </th>
+                                                <th class='emailSort changeMyImageOnSort'>State <i class='bi-arrow-down-up'> </th>
+                                                <th class='emailSort changeMyImageOnSort'>District <i class='bi-arrow-down-up'> </th>
+                                                <th class='emailSort changeMyImageOnSort'>Pincode <i class='bi-arrow-down-up'> </th>
                                                 <th class='text-center'>Action</th>
                                             </tr>
                                         </thead>
-                                    </table>
-
-
-
-                                    <table class="myTable">
                                         <tbody class="my-client-table-body">
                                             <!-- table data is comeing from database -->
                                         </tbody>
@@ -163,8 +158,6 @@ if (!isset($_SESSION['email'])) {
 
 
 
-                                    <!-- record of users -->
-                                    <!-- Table comeing from database  -->
 
                                 </div>
 
@@ -182,7 +175,7 @@ if (!isset($_SESSION['email'])) {
 
                         <div class="add-user-master">
 
-                            <form id="addUserFormData">
+                            <form id="addClientFormData">
 
                                 <div class="row">
 
@@ -199,7 +192,7 @@ if (!isset($_SESSION['email'])) {
                                         <input type="tel" name="phone" id="user_phone" placeholder="Enter phone" class="form-control" maxlength="10">
                                         <small class="text-danger phone-error"></small>
                                     </div>
-                                    
+
                                     <div>
                                         <label for="user_email" class="mb-2 mt-2">Email</label>
                                         <input type="email" name="email" id="user_email" placeholder="Enter email" class="form-control" maxlength="30">
@@ -208,24 +201,52 @@ if (!isset($_SESSION['email'])) {
 
                                     <div>
                                         <label for="user_address" class="mb-2 mt-2">Address</label>
-                                        <input type="text" name="address" id="user_address" placeholder="Enter address" class="form-control" maxlength="30">
+                                        <input type="text" name="address" id="user_address" placeholder="Enter address" class="form-control" maxlength="150">
                                         <small class="text-danger address-error"></small>
                                     </div>
 
                                     <div>
                                         <label for="user_state" class="mb-2 mt-2">State</label>
-                                        <!-- <input type="text" name="state" id="user_state" placeholder="Enter address" class="form-control" maxlength="30"> -->
-                                        <select name="state" id="user_state">
-                                            <option value="">--Select state--</option>
+                                        <select name="state" id="user_state" class="form-select">
+                                            <option value="" name="state-name">--Select state-- </option>
+                                            <?php
+
+                                            include "assets/backend/connection.php";
+
+                                            $sql = "select state_name , state_id from state_master";
+
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<option id='{$row['state_id']}'>{$row['state_name']}</option>";
+                                                }
+                                            };
+
+                                            ?>
                                         </select>
-                                        <small class="text-danger address-error"></small>
+                                        <small class="text-danger state-error"></small>
+                                    </div>
+
+                                    <div>
+                                        <label for="user_district" class="mb-2 mt-2">City</label>
+                                        <select name="district" id="user_district" class="form-select">
+                                            <option value="" id="first-option-city">--Select city--</option>
+                                        </select>
+                                        <small class="text-danger district-error"></small>
+                                    </div>
+
+                                    <div>
+                                        <label for="user_pincode" class="mb-2 mt-2">Pincode</label>
+                                        <input type="text" name="pincode" id="user_pincode" placeholder="Enter pincode" class="form-control" maxlength="6">
+                                        <small class="text-danger pincode-error"></small>
                                     </div>
 
                                 </div>
 
                                 <div>
-                                    <button type="button" class="btn bg-primary text-light mt-4" id="user-master-submit-btn">Add User</button>
-                                    <button type="button" class="btn bg-primary text-light mt-4" id="user-master-update-btn" name="update-btn">Update User</button>
+                                    <button type="button" class="btn bg-primary text-light mt-4" id="client-master-submit-btn">Add Client</button>
+                                    <button type="button" class="btn bg-primary text-light mt-4" id="client-master-update-btn" name="update-btn" style="display: none;">Update Client</button>
                                 </div>
 
                             </form>

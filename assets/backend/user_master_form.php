@@ -12,7 +12,6 @@ if (isset($_POST)) {
             array_push($emptyArr, $key);
         }
     }
-    // $fieldEmpty =  json_encode($emptyArr);
 }
 
 $validationArr = [];
@@ -85,8 +84,26 @@ if(isset($_POST['email'])){
 }
 
 
+$duplicatePhone = [];
+
+if(isset($_POST['phone'])){
+
+    include "connection.php";
+    
+    $sql3 = "SELECT phone FROM user_master 
+    WHERE phone = {$_POST['phone']}";
+    
+    $result = $conn->query($sql3);
+    
+    if($result->num_rows > 0){
+        array_push($duplicatePhone , 'phone');
+    }
+}
+
+
 $submitSuccess = "";
-if (empty($emptyArr) && empty($validationArr) && empty($duplicateEmail)) {
+
+if (empty($emptyArr) && empty($validationArr) && empty($duplicateEmail) && empty($duplicatePhone)) {
 
     include "connection.php";
 
@@ -98,5 +115,5 @@ if (empty($emptyArr) && empty($validationArr) && empty($duplicateEmail)) {
 }
 
 // sending data to ajax in json format
-// echo json_encode(['required' => $emptyArr, 'valid' => $validationArr, 'success' => $submitSuccess ]);
-echo json_encode(['required' => $emptyArr, 'valid' => $validationArr, 'success' => $submitSuccess , 'duplicate' => $duplicateEmail]);
+
+echo json_encode(['required' => $emptyArr, 'valid' => $validationArr, 'success' => $submitSuccess , 'duplicateEmail' => $duplicateEmail , 'duplicatePhone' => $duplicatePhone ]);
