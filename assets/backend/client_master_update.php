@@ -37,8 +37,7 @@ class formValidation
         // global $validationArr;
         if (!preg_match($this->regexp, $this->value)) {
             array_push($validationArr, $this->name);
-        }
-        else {
+        } else {
             // Find the key of the element
             $key = array_search($this->name,  $validationArr);
 
@@ -54,18 +53,22 @@ class formValidation
 
 $fields = [
     ['value' => trim($_POST['name'] ?? ''), 'regexp' => '/^[a-zA-Z\ ]{3,30}$/', 'name' => 'name'],
-    ['value' => trim($_POST['password'] ?? ''), 'regexp' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/', 'name' => 'password'],
     ['value' => trim($_POST['email'] ?? ''), 'regexp' => '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', 'name' => 'email'],
     ['value' => trim($_POST['phone'] ?? ''), 'regexp' => '/^[0-9]{10}$/', 'name' => 'phone'],
+    ['value' => trim($_POST['address'] ?? ''), 'regexp' => "/^[a-zA-Z0-9\s,'-]+$/", 'name' => 'address'],
+    ['value' => trim($_POST['state'] ?? ''), 'regexp' => "/.*./", 'name' => 'state'],
+    ['value' => trim($_POST['district'] ?? ''), 'regexp' => "/.*./", 'name' => 'district'],
+    ['value' => trim($_POST['pincode'] ?? ''), 'regexp' => "/^[0-9]{6}$/", 'name' => 'pincode'],
 ];
 
-foreach($fields as $field){
+foreach ($fields as $field) {
 
-    $validObj = new formValidation($field['value'] , $field['regexp'] , $field['name']);
+    $validObj = new formValidation($field['value'], $field['regexp'], $field['name']);
 
     $validObj->validation();
-
 }
+
+
 
 $duplicateEmail = [];
 
@@ -73,13 +76,12 @@ if(isset($_POST['email'])){
 
     include "connection.php";
     
-    $sql2 = "SELECT email FROM user_master WHERE email = '{$_POST['email']}'";
+    $sql2 = "SELECT email FROM client_master WHERE email= '{$_POST['email']}' && id != {$_POST['id']}";
     
     $result = $conn->query($sql2);
     
     if($result->num_rows > 0){
         array_push($duplicateEmail , 'email');
-        // $emailDup =  json_encode($duplicateEmail);
     }
 }
 
@@ -90,8 +92,7 @@ if(isset($_POST['phone'])){
 
     include "connection.php";
     
-    $sql3 = "SELECT phone FROM user_master 
-    WHERE phone = {$_POST['phone']}";
+    $sql3 = "SELECT phone FROM client_master WHERE phone= {$_POST['phone']} && id != {$_POST['id']}";
     
     $result = $conn->query($sql3);
     
@@ -101,19 +102,24 @@ if(isset($_POST['phone'])){
 }
 
 
+
+
 $submitSuccess = "";
 
 if (empty($emptyArr) && empty($validationArr) && empty($duplicateEmail) && empty($duplicatePhone)) {
 
     include "connection.php";
 
-    $sql = "Insert into user_master values (null , '{$_POST['name']}'  , '{$_POST['phone']}', '{$_POST['email']}', '{$_POST['password']}')";
+    $sql = "update client_master set NAME = '{$_POST['name']}' , phone = '{$_POST['phone']}' , email = '{$_POST['email']}' , address = '{$_POST['address']}'  , state = '{$_POST['state']}' , district = '{$_POST['district']}' , pincode = '{$_POST['pincode']}' 
+    where id = {$_POST['id']}" ;
 
     $conn->query($sql);
 
     $submitSuccess =  "1";
 }
 
-// sending data to ajax in json format
 
-echo json_encode(['required' => $emptyArr, 'valid' => $validationArr, 'success' => $submitSuccess , 'duplicateEmail' => $duplicateEmail , 'duplicatePhone' => $duplicatePhone ]);
+echo json_encode(['empty' => $emptyArr , 'valid' => $validationArr , 'duplicateEmail' => $duplicateEmail , 'success' => $submitSuccess , 'duplicatePhone' => $duplicatePhone ]);
+
+
+// print_r($_POST);

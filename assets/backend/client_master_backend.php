@@ -5,8 +5,8 @@ include "connection.php";
 // Limit of data 
 $limit = "";
 
-if (isset($_POST['page_limit'])) {
-    $limit = $_POST['page_limit'];
+if (isset($_POST['limit'])) {
+    $limit = $_POST['limit'];
 } else {
     $limit = 5;
 }
@@ -14,8 +14,8 @@ if (isset($_POST['page_limit'])) {
 // Current page in pagination 
 $current_page = "";
 
-if (isset($_POST['curr_page'])) {
-    $current_page = $_POST['curr_page'];
+if (isset($_POST['pageignation_number'])) {
+    $current_page = $_POST['pageignation_number'];
 } else {
     $current_page = 1;
 }
@@ -71,12 +71,12 @@ if(isset($_POST['email'])){
 // sorting form data 
 $sortId = "";
 
-if(isset($_POST['sort'])){
-    if(empty($_POST['sort'])){
+if(isset($_POST['sortOn'])){
+    if(empty($_POST['sortOn'])){
         $sortId = "";
     }
     else{
-        $sortId = "order by {$_POST['sortIN']} {$_POST['sort']}";
+        $sortId = "order by {$_POST['sortOn']} {$_POST['sortType']}";
     }
 }
 
@@ -86,7 +86,7 @@ $offset = ($current_page - 1) * $limit;
 
 
 // query to limit data with offset
-$sql = "Select * from user_master where id like '%$id%' and NAME like '%$name%' and phone like '%$phone%' and email like '%$email%' $sortId  limit $offset , $limit";
+$sql = "Select * from client_master where id like '%{$_POST['id']}%' and NAME like '%{$_POST['NAME']}%' and phone like '%{$_POST['phone']}%' and address like '%{$_POST['address']}%' and  state like '%{$_POST['state']}%' and email like '%{$_POST['email']}%' and district like '%{$_POST['district']}%' and pincode like '%{$_POST['pincode']}%'  $sortId  limit $offset , $limit";
 
 $result = $conn->query($sql);
 
@@ -110,6 +110,10 @@ if ($result->num_rows > 0) {
         <td>{$row['NAME']}</td>
         <td>{$row['phone']}</td>
         <td>{$row['email']}</td>
+        <td>{$row['address']}</td>
+        <td>{$row['state']}</td>
+        <td>{$row['district']}</td>
+        <td>{$row['pincode']}</td>
         <td class='action-td'>
         <button class='btn bg-primary user-edit-btn' id='{$row['id']}'><i class='bi bi-pencil-square text-light'></i></button>
         <button class='btn bg-danger user-delete-btn' name='user-master-edit-btn' id='{$row['id']}'><i class='bi bi-trash text-light'></i></button>
@@ -122,7 +126,7 @@ if ($result->num_rows > 0) {
 
 
     // query to see how many records are in table;
-    $sql2 = "SELECT COUNT(*) AS numbers FROM user_master  where id like '%$id%' and NAME like '%$name%' and phone like '%$phone%' and email like '%$email%'   ;";
+    $sql2 = "SELECT COUNT(*) AS numbers FROM client_master  where id like '%{$_POST['id']}%' and NAME like '%{$_POST['NAME']}%' and phone like '%{$_POST['phone']}%' and address like '%{$_POST['address']}%' and  state like '%{$_POST['state']}%' and email like '%{$_POST['email']}%' and district like '%{$_POST['district']}%' and pincode like '%{$_POST['pincode']}%'   ;";
 
     $result2 = $conn->query($sql2);
 
