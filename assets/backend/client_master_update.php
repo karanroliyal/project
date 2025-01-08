@@ -5,9 +5,9 @@ $emptyArr = [];
 
 if (isset($_POST)) {
     foreach ($_POST as $key => $value) {
-        if ($key == 'id') {
-            continue;
-        }
+        // if ($key == 'id') {
+        //     continue;
+        // }
         if (empty(trim($value))) {
             array_push($emptyArr, $key);
         }

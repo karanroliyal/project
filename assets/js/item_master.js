@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
+
     // Make button selected on UI
-    $(".sidebar-btn:nth-child(3)").addClass("click");
+    $(".sidebar-btn:nth-child(4)").addClass("click");
 
     // reset search fileds 
 
@@ -12,13 +13,14 @@ $(document).ready(function () {
 
     })
 
+
     // Getting form data 
     function getFormData() {
 
         let formData = new FormData(liveFormData);
 
         $.ajax({
-            url: "assets/backend/client_master_backend.php",
+            url: "assets/backend/item_master_backend.php",
             type: "POST",
             data: formData,
             processData: false,
@@ -26,7 +28,7 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
                 console.log(data);
-                $(".my-client-table-body").html(data.table);
+                $(".my-item-table-body").html(data.table);
                 $(".my-pagination-container").html(data.pagination)
             }
         })
@@ -74,7 +76,7 @@ $(document).ready(function () {
             idSort = "ASC";
         }
 
-        let sortOn = $(this).text();
+        let sortOn = $(this).data('set');
 
         $("#sortOnId").val(sortOn);
         $("#sortTypeId").val(idSort);
@@ -114,11 +116,26 @@ $(document).ready(function () {
 
     })
 
-    // Client master form submittion
+    // Getting image on input 
 
-    $("#client-master-submit-btn").on('click', function () {
+    $("#item_image").on('input', function () {
 
-        let formData = new FormData(addClientFormData);
+
+        if ($("#item_image").val() == "") {
+            document.getElementById("imagePreview").src = "";
+        }
+        else {
+            document.getElementById("imagePreview").src = window.URL.createObjectURL(this.files[0]);
+        }
+
+    })
+
+
+    // Item master form submittion
+
+    $("#item-master-submit-btn").on('click', function () {
+
+        let formData = new FormData(addItemFormData);
 
         let checkForm = 1;
 
@@ -144,7 +161,7 @@ $(document).ready(function () {
         if (checkForm == 1) {
 
             $.ajax({
-                url: "assets/backend/client_master_form.php",
+                url: "assets/backend/item_master_form.php",
                 type: "POST",
                 data: formData,
                 processData: false,
@@ -161,49 +178,38 @@ $(document).ready(function () {
                     // when every this is ok in form
                     if (data.success == 1) {
                         console.log("Form submited successfully");
-                        $("#addClientFormData").trigger("reset");
+                        $("#addItemFormData").trigger("reset");
                         $(".Form-submition-success-message .alert-success").text(
-                            "Client Added Successfully"
+                            "Item Added Successfully"
                         );
                         $(".Form-submition-success-message").slideDown("slow");
                         setTimeout(function () {
                             $(".Form-submition-success-message").slideUp("slow");
                         }, 4000);
+                        document.getElementById("imagePreview").src = "";
+                        getFormData();
                     }
 
-                    // duplicate email
-                    if (data.duplicateEmail.length > 0) {
-                        $(".email-error").text("Email already exist");
-                    }
-                    // duplicate phone
-                    if (data.duplicatePhone.length > 0) {
-                        $(".phone-error").text("Phone already exist");
+                    // duplicate item
+                    if (data.duplicateItem.length > 0) {
+                        $(".item-error").text("Item already exist");
                     }
 
                     // validation of fileds from regularexpression
                     if (data.valid.length > 0) {
                         data.valid.forEach((ele) => {
-                            if (ele == "name") {
-                                $("." + ele + "-error").text(
-                                    "Only characters are allowed and name must be longer that 2 characters"
-                                );
+                            if (ele == "item") {
+                                $("." + ele + "-error").text("Invalid item name");
                             }
-                            if (ele == "email") {
-                                $("." + ele + "-error").text("Invaid email");
+                            if (ele == "price") {
+                                $("." + ele + "-error").text("Only numbers allowed");
                             }
-                            if (ele == "phone") {
-                                $("." + ele + "-error").text("Invaid phone number");
+                            if (ele == "description") {
+                                $("." + ele + "-error").text("Max length must be 255 only");
                             }
-                            if (ele == "district") {
-                                $("." + ele + "-error").text("Invaid City");
+                            if (ele == "image") {
+                                $("." + ele + "-error").text("Invalid type of image");
                             }
-                            if (ele == "state") {
-                                $("." + ele + "-error").text("Invaid State");
-                            }
-                            if (ele == "address") {
-                                $("." + ele + "-error").text("Invaid address");
-                            }
-
                         });
                     }
 
@@ -214,29 +220,6 @@ $(document).ready(function () {
                 },
             });
         }
-
-    })
-
-
-    // Fetching city according to state
-
-    $(document).on('change', '#user_state', function () {
-
-        let value = $(this).children(":selected").attr("id");
-
-        $(".dynamic-city").remove();
-        $("#first-option-city").text("--Select city--");
-
-
-        $.ajax({
-            url: "assets/backend/district_master.php",
-            type: "POST",
-            data: { stateId: value },
-            success: function (data) {
-                console.log(data);
-                $("#user_district").append(data);
-            }
-        })
 
     })
 
@@ -249,7 +232,7 @@ $(document).ready(function () {
         if (confirm("Do you really want to Delelte ?")) {
 
             $.ajax({
-                url: "assets/backend/client_master_delete.php",
+                url: "assets/backend/item_master_delete.php",
                 type: "POST",
                 data: { id: myId },
                 success: function (data) {
@@ -262,7 +245,6 @@ $(document).ready(function () {
         }
     });
 
-
     // Edit User data
     $(document).on("click", ".user-edit-btn", function () {
 
@@ -274,48 +256,38 @@ $(document).ready(function () {
         tab.show();
 
         $.ajax({
-            url: "assets/backend/client_master_edit.php",
+            url: "assets/backend/item_master_edit.php",
             type: "POST",
             data: { id: myId },
             success: function (data) {
                 data = JSON.parse(data);
                 console.log(data);
                 $("#sendId").val(myId);
-                $("#user_name").val(data.NAME);
-                $("#user_phone").val(data.phone);
-                $("#user_email").val(data.email);
-                $("#user_address").val(data.address);
-                $("#user_district").val(data.district);
-                $("#user_pincode").val(data.pincode);
-                $("#user_district").val(data.district);
-                $("#user_state").val(data.state);
+                $("#item_name").val(data.item_name);
+                $("#item_description").val(data.item_description);
+                $("#item_price").val(data.item_price);
+                document.getElementById("imagePreview").src = "assets"+data.item_image.substring(2);
 
-                let idOfState = $("#user_state").children(":selected").attr("id");
-                console.log(idOfState);
-
-
-                $("#user_state").trigger("change");
-
-                $("#first-option-city").text(data.district);
-                $("#first-option-city").val(data.district);
-
-                $("#client-master-submit-btn").hide();
-                $("#client-master-update-btn").show();
+                $("#item-master-submit-btn").hide();
+                $("#item-master-update-btn").show();
             },
         });
 
 
     });
 
-
     // update client btn
-    $("#client-master-update-btn").on("click", function () {
+    $("#item-master-update-btn").on("click", function () {
 
-        let formData = new FormData(addClientFormData);
+        let formData = new FormData(addItemFormData);
 
         let checkForm = 1;
 
         fieldsData.map((ele) => {
+
+            if (ele.id === "#item_image") {
+                return null;  // Skip this iteration
+            }
             let value = $(ele.id).val();
 
 
@@ -337,7 +309,7 @@ $(document).ready(function () {
         if (checkForm == 1) {
 
             $.ajax({
-                url: "assets/backend/client_master_update.php",
+                url: "assets/backend/item_master_update.php",
                 type: "POST",
                 data: formData,
                 processData: false,
@@ -354,8 +326,8 @@ $(document).ready(function () {
                     // when every this is ok in form
                     if (data.success == 1) {
                         console.log("Form submited successfully");
-                        $("#addClientFormData").trigger("reset");
-                        // $("#addUserFormData").trigger("reset");
+                        $("#addItemFormData").trigger("reset");
+                        document.getElementById("imagePreview").src = "";
                         let change = $("#nav-home-tab");
 
                         let tab = new bootstrap.Tab(change);
@@ -363,41 +335,31 @@ $(document).ready(function () {
                         getFormData();
                     }
 
-                    // duplicate email
-                    if (data.duplicateEmail.length > 0) {
-                        $(".email-error").text("Email already exist");
-                    }
-                    // duplicate phone
-                    if (data.duplicatePhone.length > 0) {
-                        $(".phone-error").text("Phone already exist");
+                    // duplicate item
+                    if (data.duplicateItem.length > 0) {
+                        $(".item-error").text("Item already exist");
                     }
 
                     // validation of fileds from regularexpression
                     if (data.valid.length > 0) {
                         data.valid.forEach((ele) => {
-                            if (ele == "name") {
-                                $("." + ele + "-error").text(
-                                    "Only characters are allowed and name must be longer that 2 characters"
-                                );
+                            if (ele == "item") {
+                                $("." + ele + "-error").text("Invalid item name");
                             }
-                            if (ele == "email") {
-                                $("." + ele + "-error").text("Invaid email");
+                            if (ele == "price") {
+                                $("." + ele + "-error").text("Only numbers allowed");
                             }
-                            if (ele == "phone") {
-                                $("." + ele + "-error").text("Invaid phone number");
+                            if (ele == "description") {
+                                $("." + ele + "-error").text("Max length must be 255 only");
                             }
-                            if (ele == "district") {
-                                $("." + ele + "-error").text("Invaid City");
+                            if (ele == "image") {
+                                $("." + ele + "-error").text("Invalid type of image");
                             }
-                            if (ele == "state") {
-                                $("." + ele + "-error").text("Invaid State");
-                            }
-                            if (ele == "address") {
-                                $("." + ele + "-error").text("Invaid address");
-                            }
-
                         });
                     }
+
+                    // query of insert 
+                    console.log(data.query);
 
                     data.empty.forEach((ele) => {
                         $("." + ele + "-error").text("field is required");
@@ -410,16 +372,14 @@ $(document).ready(function () {
 
     });
 
-   // loading table and clearing form fields when clicking on home page
+
+    // clearing form fields when clicking on home page
     $("#nav-home-tab").on("click", function () {
 
-        getFormData();
-
-        $("#addClientFormData").trigger("reset");
-        $("#user_state").trigger("change");
+        $("#addItemFormData").trigger("reset");
+        document.getElementById("imagePreview").src = "";
 
     })
-
 
 
 })

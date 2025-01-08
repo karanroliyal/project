@@ -50,8 +50,8 @@ if (!isset($_SESSION['email'])) {
                 <!-- <h3>User master</h3> -->
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Users</button>
-                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add User</button>
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Client</button>
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add Client</button>
 
                     </div>
                 </nav>
@@ -103,7 +103,7 @@ if (!isset($_SESSION['email'])) {
                                 <input type="hidden" name="sortOn" id="sortOnId" value="">
                                 <input type="hidden" name="sortType" id="sortTypeId" value="">
 
-                                <button class="btn bg-danger text-light reset-btn">Reset</button>
+                                <button type="button" class="btn bg-danger text-light reset-btn">Reset</button>
 
                             </form>
 
