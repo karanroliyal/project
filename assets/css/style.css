@@ -333,7 +333,7 @@ body {
 
                     td,
                     th {
-                        padding: 5px;
+                        padding: 4px;
                     }
                 }
 
@@ -401,16 +401,16 @@ body {
                 width: 20%;
             }
             .my-client-table-head  tr th:nth-child(7){
-                width: 13%;
+                width: 10%;
             }
             .my-client-table-head  tr th:nth-child(8){
-                width: 13%;
+                width: 10%;
             }
             .my-client-table-head  tr th:nth-child(9){
                 width: 8%;
             }
             .my-client-table-head  tr th:nth-child(10){
-                width: 10%;
+                width: 20%;
             }
 
 
@@ -449,3 +449,121 @@ body {
 
 
 /* **************************** User master page css end ********************************************* */
+
+
+
+/* **************************** Item master page css Start ********************************************* */
+
+.user-master-all-users .item-master-search{
+    justify-content: normal;
+}
+
+.table-container {
+
+    .my-item-table-head  tr th:nth-child(1){
+        width: 8%;
+    }
+    .my-item-table-head  tr th:nth-child(2){
+        width: 8%;
+    }
+    .my-item-table-head  tr th:nth-child(3){
+        width: 15%;
+    }
+    .my-item-table-head  tr th:nth-child(4){
+        width: 10%;
+    }
+    .my-item-table-head  tr th:nth-child(5){
+        width: 30%;
+    }
+    .my-item-table-head  tr th:nth-child(6){
+        width: 15%;
+    }
+    .my-item-table-head  tr th:nth-child(7){
+        width: 25%;
+    }
+
+
+}
+
+.my-item-table-body .myImageTd img{
+
+    width: 30px;
+
+}
+
+#addItemFormData #imagePreview{
+    width: 98px;
+    margin-top: 20px;
+}
+
+
+
+
+
+/* **************************** Item master page css end ********************************************* */
+
+
+
+/* **************************** Invoice page css end ********************************************* */
+
+.table-container  {
+
+    .my-invoice-table-head  tr th:nth-child(1){
+        width: 4%;
+    }
+    .my-invoice-table-head  tr th:nth-child(2){
+        width: 9%;
+    }
+    .my-invoice-table-head  tr th:nth-child(3){
+        width: 10%;
+    }
+    .my-invoice-table-head  tr th:nth-child(4){
+        width: 11%;
+    }
+    .my-invoice-table-head  tr th:nth-child(5){
+        width: 11%;
+    }
+    .my-invoice-table-head  tr th:nth-child(6){
+        width: 12%;
+    }
+    .my-invoice-table-head  tr th:nth-child(7){
+        width: 12%;
+    }
+    .my-invoice-table-head  tr th:nth-child(8){
+        width: 11%;
+    }
+    .my-invoice-table-head  tr th:nth-child(9){
+        width: 6%;
+    }
+    .my-invoice-table-head  tr th:nth-child(10){
+        width: 5%;
+    }
+    .my-invoice-table-head  tr th:nth-child(11){
+        width: 6%;
+    }
+    .my-invoice-table-head  tr th:nth-child(12){
+        width: 20%;
+    }
+
+
+}
+
+#addInvoiceFormData{
+
+
+    .client-detail-container{
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+
+}
+
+
+
+
+/* **************************** Invoice page css end ********************************************* */
+
+
+

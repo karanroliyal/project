@@ -2,6 +2,17 @@ $(document).ready(function () {
   // Make button selected on UI
   $(".sidebar-btn:nth-child(2)").addClass("click");
 
+  // reset search fileds 
+
+  $(".reset-btn").click(function(){
+
+    $(".live-search-inputs input").val("");
+   
+      loadTable();
+
+})
+
+  // getting table data
   function loadTable(limit, page, sId, sname_, sphone, semail, Sort, sortOn) {
     $.ajax({
       url: "assets/backend/user_master_backend.php",

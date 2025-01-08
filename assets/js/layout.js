@@ -66,16 +66,40 @@ $(document).ready(function () {
     },
     {
       id: "#user_state",
-      regexp: /^[a-zA-Z]$/,
+      regexp: /^[a-zA-Z]+$/,
       errId: ".state-error",
       errText: "",
     },
     {
       id: "#user_district",
-      regexp: /^[a-zA-Z]$/,
+      regexp: /^[a-zA-Z]+$/,
       errId: ".district-error",
       errText: "",
     },
+    {
+      id: "#item_name",
+      regexp: /^[a-zA-Z ]+$/,
+      errId: ".item-error",
+      errText: "Invalid item name",
+    },
+    {
+      id: "#item_price",
+      regexp: /^[0-9]+$/,
+      errId: ".price-error",
+      errText: "Only numbers allowed",
+    },
+    {
+      id: "#item_description",
+      regexp: /^[a-zA-Z0-9 ]{1,255}$/,
+      errId: ".description-error",
+      errText: "Max length must be 255 only",
+    },
+    {
+      id: "#item_image",
+      regexp: /(\.jpg|\.jpeg|\.png|\.gif)$/i,
+      errId: ".image-error",
+      errText: "Invalid type of image",
+    }
   ];
 
   // Input taking for validation

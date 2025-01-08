@@ -1,0 +1,73 @@
+-- item MASTER TABLE 
+
+CREATE TABLE item_master
+(
+id INT AUTO_INCREMENT,
+item_name VARCHAR(70) NOT NULL UNIQUE,
+item_price INT NOT NULL,
+item_description VARCHAR(255) NOT NULL ,
+item_image VARCHAR(255) NOT NULL,
+PRIMARY KEY(id)
+);
+
+
+INSERT INTO item_master
+VALUES
+(NULL, 'ball', 300, 'used for bowling in cricket', 'images/ball.png'),
+(NULL, 'glove', 200, 'protects hands in cricket', 'images/glove.png'),
+(NULL, 'helmet', 750, 'protects head in cricket', 'images/helmet.png'),
+(NULL, 'pads', 400, 'worn on legs to protect in cricket', 'images/pads.png'),
+(NULL, 'stumps', 100, 'used for setting up wicket in cricket', 'images/stumps.png'),
+(NULL, 'batting gloves', 250, 'protects hands while batting', 'images/batting_gloves.png'),
+(NULL, 'wicket-keeper gloves', 350, 'used by wicketkeeper', 'images/wicket_keeper_gloves.png'),
+(NULL, 'cricket shoes', 800, 'worn by players during matches', 'images/cricket_shoes.png'),
+(NULL, 'cricket bag', 600, 'used to carry cricket equipment', 'images/cricket_bag.png'),
+(NULL, 'bowling machine', 15000, 'used for training in cricket', 'images/bowling_machine.png'),
+(NULL, 'sunglasses', 150, 'worn by players to protect eyes', 'images/sunglasses.png'),
+(NULL, 'boundary rope', 400, 'used to mark the boundary', 'images/boundary_rope.png'),
+(NULL, 'trophy', 1000, 'awarded to winners in cricket tournaments', 'images/trophy.png'),
+(NULL, 'pitch roller', 5000, 'used to flatten cricket pitch', 'images/pitch_roller.png'),
+(NULL, 'scoreboard', 2500, 'displays match score', 'images/scoreboard.png'),
+(NULL, 'umpire kit', 700, 'used by umpires for decisions', 'images/umpire_kit.png'),
+(NULL, 'cricket cap', 200, 'worn by players for sun protection', 'images/cricket_cap.png'),
+(NULL, 'training cones', 50, 'used for fielding drills in cricket', 'images/training_cones.png'),
+(NULL, 'cricket bat cover', 100, 'protects cricket bat during storage', 'images/bat_cover.png'),
+(NULL, 'cricket ball bag', 250, 'used to carry cricket balls', 'images/ball_bag.png');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
