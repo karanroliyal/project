@@ -18,8 +18,10 @@ if (!isset($_SESSION['email'])) {
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="assets/js/jquery.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Invoice</title>
 </head>
 
@@ -154,8 +156,8 @@ if (!isset($_SESSION['email'])) {
                                                 <td>karan@gmail.com</td>
                                                 <td>8368145192</td>
                                                 <td>₹20000</td>
-                                                <td>pdf</td>
-                                                <td>mail</td>
+                                                <td><i class="bi bi-file-earmark-pdf-fill text-danger"></i></td>
+                                                <td><i class="bi bi-envelope-fill text-primary"></i></td>
                                                 <td>action</td>
                                             </tr>
                                             <tr>
@@ -168,8 +170,8 @@ if (!isset($_SESSION['email'])) {
                                                 <td>karan@gmail.com</td>
                                                 <td>8368145192</td>
                                                 <td>₹20000</td>
-                                                <td>pdf</td>
-                                                <td>mail</td>
+                                                <td><i class="bi bi-file-earmark-pdf-fill text-danger"></i></td>
+                                                <td><i class="bi bi-envelope-fill text-primary"></i></td>
                                                 <td>action</td>
                                             </tr>
 
@@ -254,7 +256,7 @@ if (!isset($_SESSION['email'])) {
                                             </div>
                                             <div class="col-3">
                                                 <label for="quantityAddId">Quantity</label>
-                                                <input type="number" id="quantityAddId" class="form-control" >
+                                                <input type="number" id="quantityAddId" class="form-control">
                                             </div>
                                             <div class="col-3">
                                                 <label for="amountAddId">Amount</label>
@@ -264,7 +266,7 @@ if (!isset($_SESSION['email'])) {
                                         </div>
 
                                         <div>
-                                            <button type="button" class="btn bg-success text-light" >Add item</button>
+                                            <button type="button" class="btn bg-success text-light">Add item</button>
                                         </div>
 
 
