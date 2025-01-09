@@ -1,0 +1,19 @@
+-- Invoice master
+
+use myproject;
+
+create table invoice_master (
+
+id int auto_increment,
+invoice_number int unique,
+client_id int,
+client_name varchar(70),
+client_phone bigint,
+client_email varchar(70),
+client_address varchar(100),
+total_amount varchar(100),
+primary key(id)
+
+);
+
+

@@ -115,8 +115,8 @@ if ($result->num_rows > 0) {
         <td>{$row['district']}</td>
         <td>{$row['pincode']}</td>
         <td class='action-td'>
-        <button class='btn bg-primary user-edit-btn' id='{$row['id']}'><i class='bi bi-pencil-square text-light'></i></button>
-        <button class='btn bg-danger user-delete-btn' name='user-master-edit-btn' id='{$row['id']}'><i class='bi bi-trash text-light'></i></button>
+        <button class='btn bg-primary user-edit-btn rounded-circle' id='{$row['id']}'><i class='bi bi-pencil-square text-light'></i></button>
+        <button class='btn bg-danger user-delete-btn rounded-circle' name='user-master-edit-btn' id='{$row['id']}'><i class='bi bi-trash text-light'></i></button>
         </td>
     </tr>";
         $sno++;

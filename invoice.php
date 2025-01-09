@@ -247,20 +247,20 @@ if (!isset($_SESSION['email'])) {
 
                                         <div class="row mb-4 duplicate-row">
 
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <label for="">Item name</label>
                                                 <input name="item_name[]" type="text" class="form-control itemAddId" id="itemAddId" onkeyup="getitems(this)">
                                                 <small class="no-item-found"></small>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <label for="">Item price</label>
                                                 <input name="item_price[]" type="text" class="form-control itemPriceAddId" disabled>
                                             </div>
                                             <div class="col-2">
                                                 <label for="">Quantity</label>
-                                                <input name="item_quantity[]" type="number" class="form-control quantityAddId" min=0>
+                                                <input name="item_quantity[]" type="number" class="form-control quantityAddId" min=1 >
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <label for="">Amount</label>
                                                 <input name="total[]" type="text" class="form-control amountAddId" disabled>
                                             </div>
@@ -291,15 +291,11 @@ if (!isset($_SESSION['email'])) {
                                     </div>
 
 
-
-
-
-                                    <button type="button" class="btn bg-primary text-light mt-4" id="item-master-submit-btn">Add Invoice</button>
-                                    <button type="button" class="btn bg-primary text-light mt-4" id="item-master-update-btn" name="update-btn" style="display: none;">Update Invoice</button>
-
-
-
+                                    
                                 </div>
+
+                                <button type="button" class="btn bg-primary text-light mt-4" id="item-master-submit-btn">Add Invoice</button>
+                                <button type="button" class="btn bg-primary text-light mt-4" id="item-master-update-btn" name="update-btn" style="display: none;">Update Invoice</button>
 
 
                             </form>

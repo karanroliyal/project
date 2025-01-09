@@ -69,65 +69,6 @@ $(document).ready(function () {
 
 
 
-    // item name get from auto-complete
-
-    let itemAutoComplete = [];
-
-    // $(".code-container").on('click', '.itemAddId', function () {
-    //     $(".itemAddId").keyup(function(){
-    //     console.log("click");
-
-    //     // $(this).val("hello");
-    //     console.log(this,'this');
-    //     $('.itemAddId').autocomplete({
-    //         source: function (request, response) {
-    //             let value = request.term; // `term` is the query the user is typing
-
-    //             $.ajax({
-    //                 url: "assets/backend/item_master_autocomplete.php",
-    //                 type: "POST",
-    //                 data: { str: value },
-    //                 success: function (data) {
-    //                     console.log(data);
-    //                     if (data == 0) {
-    //                         itemAutoComplete = [];
-    //                         return false
-    //                     }
-    //                     else {
-    //                         data = JSON.parse(data);
-    //                         itemAutoComplete = [];
-
-    //                         let myArr = data.object;
-
-    //                         // Populate itemAutoComplete with the fetched results
-    //                         myArr.map(ele => {
-    //                             itemAutoComplete.push({
-    //                                 id: ele.id,
-    //                                 label: ele.item_name,  // show up in the dropdown
-    //                                 value: ele.item_name,  // populate in the input field when selected
-    //                                 price: ele.item_price,
-    //                             });
-    //                         });
-
-    //                         response(itemAutoComplete);
-    //                     }
-    //                 }
-    //             });
-    //         },
-    //         select: function (event, ui) {
-
-    //             $(this).parents('.duplicate-row').find(".itemPriceAddId").val(ui.item.price);
-    //         }
-    //     });
-    // });
-
-
-    // })
-
-
-
-
-
 
 
 
@@ -158,23 +99,18 @@ $(document).ready(function () {
 
     }
 
-    // $(".cloned-item-btn").click(function () {
-
-    //     let $newRow = $(".code-container .duplicate-row:last-child").clone(true).appendTo(".code-container");
-    //     $newRow.find("input").val("");
-
-    // })
+    // cloning the item form
 
     $('.cloned-item-btn').click(function () {
+
         var value = "";
 
         var prnt = $(".client-detail-container-item");
-        var trFrstChild = prnt.find("div.row:first-child");
+        var trFrstChild = prnt.find("div.duplicate-row:first-child");
         var cloneChild = trFrstChild.clone();
-        cloneChild.find("input[type='text']").val('');
+        cloneChild.find("input[type='text'] , input[type='number']").val('');
         var appendedTo = prnt.find("div.code-container").append(cloneChild);
-        // var tableRow = $(e).closest(".duplicate-row");
-        // var qty = tableRow.find(".quantity").val(value);
+
     });
 
     // delete item rows
@@ -197,50 +133,53 @@ $(document).ready(function () {
 
 })
 
+// item name get from auto-complete
+
+let itemAutoComplete = [];
 
 function getitems(e) {
- //     // $(this).val("hello");
-        console.log(this,'this');
-        $('.itemAddId').autocomplete({
-            source: function (request, response) {
-                let value = request.term; // `term` is the query the user is typing
+    //     // $(this).val("hello");
+    // console.log(this, 'this');
+    $('.itemAddId').autocomplete({
+        source: function (request, response) {
+            let value = request.term; // `term` is the query the user is typing
 
-                $.ajax({
-                    url: "assets/backend/item_master_autocomplete.php",
-                    type: "POST",
-                    data: { str: value },
-                    success: function (data) {
-                        console.log(data);
-                        if (data == 0) {
-                            itemAutoComplete = [];
-                            return false
-                        }
-                        else {
-                            data = JSON.parse(data);
-                            itemAutoComplete = [];
-
-                            let myArr = data.object;
-
-                            // Populate itemAutoComplete with the fetched results
-                            myArr.map(ele => {
-                                itemAutoComplete.push({
-                                    id: ele.id,
-                                    label: ele.item_name,  // show up in the dropdown
-                                    value: ele.item_name,  // populate in the input field when selected
-                                    price: ele.item_price,
-                                });
-                            });
-
-                            response(itemAutoComplete);
-                        }
+            $.ajax({
+                url: "assets/backend/item_master_autocomplete.php",
+                type: "POST",
+                data: { str: value },
+                success: function (data) {
+                    // console.log(data);
+                    if (data == 0) {
+                        itemAutoComplete = [];
+                        return false
                     }
-                });
-            },
-            select: function (event, ui) {
+                    else {
+                        data = JSON.parse(data);
+                        itemAutoComplete = [];
 
-                $(this).parents('.duplicate-row').find(".itemPriceAddId").val(ui.item.price);
-            }
-        });
-    
-    
+                        let myArr = data.object;
+
+                        // Populate itemAutoComplete with the fetched results
+                        myArr.map(ele => {
+                            itemAutoComplete.push({
+                                id: ele.id,
+                                label: ele.item_name,  // show up in the dropdown
+                                value: ele.item_name,  // populate in the input field when selected
+                                price: ele.item_price,
+                            });
+                        });
+
+                        response(itemAutoComplete);
+                    }
+                }
+            });
+        },
+        select: function (event, ui) {
+
+            $(this).parents('.duplicate-row').find(".itemPriceAddId").val(ui.item.price);
+        }
+    });
+
+
 }
