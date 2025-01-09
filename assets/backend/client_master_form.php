@@ -100,6 +100,7 @@ if(isset($_POST['phone'])){
     if($result->num_rows > 0){
         array_push($duplicatePhone , 'phone');
     }
+    
 }
 
 

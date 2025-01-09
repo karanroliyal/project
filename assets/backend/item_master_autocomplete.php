@@ -6,7 +6,7 @@ if(isset($_POST['str'])){
 
     include "connection.php";
 
-    $sql = "Select * from client_master where NAME like '%{$_POST['str']}%'";
+    $sql = "Select * from item_master where item_name like '%{$_POST['str']}%'";
 
     $result = $conn->query($sql);
 
@@ -22,6 +22,9 @@ if(isset($_POST['str'])){
 
         echo json_encode(['object' => $object]);
 
+    }
+    else{
+        echo 0 ;
     }
 
 }

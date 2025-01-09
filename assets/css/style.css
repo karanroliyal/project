@@ -560,6 +560,9 @@ body {
 
 }
 
+.ui-autocomplete {
+    z-index: 9999 !important;
+}
 
 
 

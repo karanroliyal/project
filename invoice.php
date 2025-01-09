@@ -19,8 +19,10 @@ if (!isset($_SESSION['email'])) {
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/jquery.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/smoothness/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <!-- Autocomplete CDN  start -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- Autocomplete CDN  end -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Invoice</title>
 </head>
@@ -222,15 +224,15 @@ if (!isset($_SESSION['email'])) {
                                         </div>
                                         <div class="col-3">
                                             <label for="phoneAddId">Phone</label>
-                                            <input type="text" id="phoneAddId" class="form-control">
+                                            <input type="text" id="phoneAddId" class="form-control" disabled>
                                         </div>
                                         <div class="col-3">
                                             <label for="emailAddId">Email</label>
-                                            <input type="text" id="emailAddId" class="form-control">
+                                            <input type="text" id="emailAddId" class="form-control" disabled>
                                         </div>
                                         <div class="col-3">
                                             <label for="addressAddId">Address</label>
-                                            <input type="text" id="addressAddId" class="form-control">
+                                            <input type="text" id="addressAddId" class="form-control" disabled>
                                         </div>
 
                                     </div>
@@ -238,45 +240,64 @@ if (!isset($_SESSION['email'])) {
                                 </div>
 
 
-                                <div class="client-detail-container">
+                                <div class="client-detail-container-item">
 
 
-                                    <div>
+                                    <div class="code-container">
 
+                                        <div class="row mb-4 duplicate-row">
 
-                                        <div class="row mb-3">
-
-                                            <div class="col-3">
-                                                <label for="itemAddId">Item name</label>
-                                                <input type="text" id="itemAddId" class="form-control">
+                                            <div class="col-2">
+                                                <label for="">Item name</label>
+                                                <input name="item_name[]" type="text" class="form-control itemAddId" id="itemAddId" onkeyup="getitems(this)">
+                                                <small class="no-item-found"></small>
                                             </div>
-                                            <div class="col-3">
-                                                <label for="itemPriceAddId">Item price</label>
-                                                <input type="text" id="itemPriceAddId" class="form-control" disabled>
+                                            <div class="col-2">
+                                                <label for="">Item price</label>
+                                                <input name="item_price[]" type="text" class="form-control itemPriceAddId" disabled>
                                             </div>
-                                            <div class="col-3">
-                                                <label for="quantityAddId">Quantity</label>
-                                                <input type="number" id="quantityAddId" class="form-control">
+                                            <div class="col-2">
+                                                <label for="">Quantity</label>
+                                                <input name="item_quantity[]" type="number" class="form-control quantityAddId" min=0>
                                             </div>
-                                            <div class="col-3">
-                                                <label for="amountAddId">Amount</label>
-                                                <input type="text" id="amountAddId" class="form-control" disabled>
+                                            <div class="col-2">
+                                                <label for="">Amount</label>
+                                                <input name="total[]" type="text" class="form-control amountAddId" disabled>
+                                            </div>
+
+                                            <div class="col-2 mt-4">
+                                                <button type="button" class="btn bg-danger delete-row"><i class="bi bi-trash text-light"></i></button>
                                             </div>
 
                                         </div>
-
-                                        <div>
-                                            <button type="button" class="btn bg-success text-light">Add item</button>
-                                        </div>
-
-
-
-                                        <button type="button" class="btn bg-primary text-light mt-4" id="item-master-submit-btn">Add Invoice</button>
-                                        <button type="button" class="btn bg-primary text-light mt-4" id="item-master-update-btn" name="update-btn" style="display: none;">Update Invoice</button>
 
 
 
                                     </div>
+
+
+
+                                    <div class="row">
+
+
+                                        <div class="col-6 mt-4">
+                                            <button type="button" class="btn bg-success text-light cloned-item-btn">Add item</button>
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="totalAmount">Total Amount:</label>
+                                            <input type="text" placeholder="Total Amount" class="form-control" id="totalAmount" disabled>
+                                        </div>
+
+                                    </div>
+
+
+
+
+
+                                    <button type="button" class="btn bg-primary text-light mt-4" id="item-master-submit-btn">Add Invoice</button>
+                                    <button type="button" class="btn bg-primary text-light mt-4" id="item-master-update-btn" name="update-btn" style="display: none;">Update Invoice</button>
+
+
 
                                 </div>
 

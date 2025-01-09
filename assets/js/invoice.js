@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     // reset search fileds 
 
-    $(".reset-btn").click(function(){
+    $(".reset-btn").click(function () {
 
         $("input").val("");
 
@@ -16,35 +16,231 @@ $(document).ready(function () {
 
     // client name get from auto-complete
 
-    let dataForComplete = [];
+    let clientAutoComplete = [];
 
-    $("#clientAddId").on('input' , function(){
-        $.ajax({
-            url: "assets/backend/client_master_autocomplete.php",
-            // dataType: "json",
-            type: "POST",
-            success: function(data){
-                data = JSON.parse(data);
-                let myArr = data.object;
-                myArr.map(ele=>{
-                    dataForComplete.push({id:ele.id , NAME:ele.NAME , phone:ele.phone , email:ele.email , address:ele.address });
-                })
-    
-                $("#clientAddId").autocomplete({
-                    source: dataForComplete,
-                    select:function() {
-                        $("#phoneAddId").val(data.output[0].phone);
-                        // $("#emailAddId").val(suggestion.email);
-                        // $("#addressAddId").val(suggestion.address);
-                    }
-                })
-                
-            }
-        })
+    // Initialize autocomplete only once
+    $("#clientAddId").autocomplete({
+        source: function (request, response) {
+            let value = request.term; // `term` is the query the user is typing
+
+            $.ajax({
+                url: "assets/backend/client_master_autocomplete.php",
+                type: "POST",
+                data: { str: value },
+                success: function (data) {
+                    data = JSON.parse(data);
+
+                    clientAutoComplete = [];
+
+                    let myArr = data.object;
+
+                    // Populate clientAutoComplete with the fetched results
+                    myArr.map(ele => {
+                        clientAutoComplete.push({
+                            id: ele.id,
+                            label: ele.NAME,  // show up in the dropdown
+                            value: ele.NAME,  // populate in the input field when selected
+                            phone: ele.phone,
+                            email: ele.email,
+                            address: ele.address
+                        });
+                    });
+
+                    response(clientAutoComplete);
+                }
+            });
+        },
+        select: function (event, ui) {
+            $("#phoneAddId").val(ui.item.phone);
+            $("#emailAddId").val(ui.item.email);
+            $("#addressAddId").val(ui.item.address);
+        }
+    });
+
+
+
+    // show the date in Invoice date
+
+    let d = new Date();
+    $("#InvoiceDateAddId").val(`${(d.getDate() + 10).length > 1 ? d.getDate() : "0" + d.getDate()} -${d.getMonth() + 1}-${d.getFullYear()}`);
+
+
+
+
+
+
+    // item name get from auto-complete
+
+    let itemAutoComplete = [];
+
+    // $(".code-container").on('click', '.itemAddId', function () {
+    //     $(".itemAddId").keyup(function(){
+    //     console.log("click");
+
+    //     // $(this).val("hello");
+    //     console.log(this,'this');
+    //     $('.itemAddId').autocomplete({
+    //         source: function (request, response) {
+    //             let value = request.term; // `term` is the query the user is typing
+
+    //             $.ajax({
+    //                 url: "assets/backend/item_master_autocomplete.php",
+    //                 type: "POST",
+    //                 data: { str: value },
+    //                 success: function (data) {
+    //                     console.log(data);
+    //                     if (data == 0) {
+    //                         itemAutoComplete = [];
+    //                         return false
+    //                     }
+    //                     else {
+    //                         data = JSON.parse(data);
+    //                         itemAutoComplete = [];
+
+    //                         let myArr = data.object;
+
+    //                         // Populate itemAutoComplete with the fetched results
+    //                         myArr.map(ele => {
+    //                             itemAutoComplete.push({
+    //                                 id: ele.id,
+    //                                 label: ele.item_name,  // show up in the dropdown
+    //                                 value: ele.item_name,  // populate in the input field when selected
+    //                                 price: ele.item_price,
+    //                             });
+    //                         });
+
+    //                         response(itemAutoComplete);
+    //                     }
+    //                 }
+    //             });
+    //         },
+    //         select: function (event, ui) {
+
+    //             $(this).parents('.duplicate-row').find(".itemPriceAddId").val(ui.item.price);
+    //         }
+    //     });
+    // });
+
+
+    // })
+
+
+
+
+
+
+
+
+    // Total amount of each item
+    $(document).on('input', ".quantityAddId", function () {
+
+        let price = $(this).parents(".duplicate-row").find('.itemPriceAddId').val();
+
+        let amount = parseFloat($(this).parents(".duplicate-row").find(".amountAddId").val($(this).val() * price));
+
+        // Update total amount dynamically whenever the quantity is updated
+        calculateTotalAmount();
+
+    });
+
+    // Calculate total amount from all fields
+    function calculateTotalAmount() {
+
+        let totalAmount = 0;
+
+        $(".amountAddId").each(function () {
+            let amount = parseFloat($(this).val()) || 0; // Parse and default to 0 if empty
+            totalAmount += amount;
+        });
+
+        // Update totalAmount field
+        $("#totalAmount").val(totalAmount.toFixed(2));
+
+    }
+
+    // $(".cloned-item-btn").click(function () {
+
+    //     let $newRow = $(".code-container .duplicate-row:last-child").clone(true).appendTo(".code-container");
+    //     $newRow.find("input").val("");
+
+    // })
+
+    $('.cloned-item-btn').click(function () {
+        var value = "";
+
+        var prnt = $(".client-detail-container-item");
+        var trFrstChild = prnt.find("div.row:first-child");
+        var cloneChild = trFrstChild.clone();
+        cloneChild.find("input[type='text']").val('');
+        var appendedTo = prnt.find("div.code-container").append(cloneChild);
+        // var tableRow = $(e).closest(".duplicate-row");
+        // var qty = tableRow.find(".quantity").val(value);
+    });
+
+    // delete item rows
+
+    $(document).on('click', '.code-container .duplicate-row .delete-row', function () {
+
+
+        if ($(".code-container .duplicate-row").length > 1) {
+
+            $(this).parents(".duplicate-row").remove();
+            calculateTotalAmount();
+        }
+
     })
 
 
-    
+
+
 
 
 })
+
+
+function getitems(e) {
+ //     // $(this).val("hello");
+        console.log(this,'this');
+        $('.itemAddId').autocomplete({
+            source: function (request, response) {
+                let value = request.term; // `term` is the query the user is typing
+
+                $.ajax({
+                    url: "assets/backend/item_master_autocomplete.php",
+                    type: "POST",
+                    data: { str: value },
+                    success: function (data) {
+                        console.log(data);
+                        if (data == 0) {
+                            itemAutoComplete = [];
+                            return false
+                        }
+                        else {
+                            data = JSON.parse(data);
+                            itemAutoComplete = [];
+
+                            let myArr = data.object;
+
+                            // Populate itemAutoComplete with the fetched results
+                            myArr.map(ele => {
+                                itemAutoComplete.push({
+                                    id: ele.id,
+                                    label: ele.item_name,  // show up in the dropdown
+                                    value: ele.item_name,  // populate in the input field when selected
+                                    price: ele.item_price,
+                                });
+                            });
+
+                            response(itemAutoComplete);
+                        }
+                    }
+                });
+            },
+            select: function (event, ui) {
+
+                $(this).parents('.duplicate-row').find(".itemPriceAddId").val(ui.item.price);
+            }
+        });
+    
+    
+}
