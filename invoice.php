@@ -55,7 +55,7 @@ if (!isset($_SESSION['email'])) {
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Invoice</button>
-                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add Invoice</button>
+                        <button class="nav-link" id="nav-profile-tab" onclick="generateInvoiceNumber()" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add Invoice</button>
 
                     </div>
                 </nav>
@@ -72,23 +72,23 @@ if (!isset($_SESSION['email'])) {
 
                                 <div>
                                     <label for="invoiceNoId">Invoice no.</label>
-                                    <input id="invoiceNoId" class="form-control">
+                                    <input id="invoiceNoId" name="invoice_no" class="form-control">
                                 </div>
                                 <div>
                                     <label for="clientNameId">Client name</label>
-                                    <input id="clientNameId" class="form-control">
+                                    <input id="clientNameId" class="form-control" name="cl_name">
                                 </div>
                                 <div>
                                     <label for="phoneId">Phone</label>
-                                    <input id="phoneId" class="form-control">
+                                    <input id="phoneId" class="form-control" name="cl_phone">
                                 </div>
                                 <div>
                                     <label for="emailId">Email</label>
-                                    <input id="emailId" class="form-control">
+                                    <input id="emailId" class="form-control" name="cl_email">
                                 </div>
                                 <div>
                                     <label for="invoiceDateId">Invoice date</label>
-                                    <input type="date" id="invoiceDateId" class="form-control">
+                                    <input type="date" id="invoiceDateId" class="form-control" name="bill_date">
                                 </div>
                                 <input type="hidden" name="limit" id="limitData" value="5">
                                 <input type="hidden" name="pageignation_number" id="pageId" value="1">
@@ -132,16 +132,16 @@ if (!isset($_SESSION['email'])) {
                                         <thead class='my-invoice-table-head bg-primary text-white'>
                                             <tr>
                                                 <th>S no.</th>
-                                                <th class='idSort changeMyImageOnSort'>Invoice id <i class='bi-arrow-down-up'></th>
-                                                <th class='nameSort changeMyImageOnSort'>Invoice no. <i class='bi-arrow-down-up'></i></th>
-                                                <th class='phoneSort changeMyImageOnSort'>Invoice Date <i class='bi-arrow-down-up'></i> </th>
-                                                <th class='phoneSort changeMyImageOnSort'>Client name <i class='bi-arrow-down-up'></i> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Address <i class='bi-arrow-down-up'> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Client email <i class='bi-arrow-down-up'> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Client phone <i class='bi-arrow-down-up'> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Total <i class='bi-arrow-down-up'> </th>
-                                                <th class='emailSort changeMyImageOnSort'>PDF <i class='bi-arrow-down-up'> </th>
-                                                <th class='emailSort changeMyImageOnSort'>Mail <i class='bi-arrow-down-up'> </th>
+                                                <th class='idSort changeMyImageOnSort' data-sorting="invoice_id">Invoice id <i class='bi-arrow-down-up'></th>
+                                                <th class='nameSort changeMyImageOnSort' data-sorting="invoice_number">Invoice no. <i class='bi-arrow-down-up'></i></th>
+                                                <th class='phoneSort changeMyImageOnSort' data-sorting="invoice_date">Invoice Date <i class='bi-arrow-down-up'></i> </th>
+                                                <th class='phoneSort changeMyImageOnSort' data-sorting="NAME">Client name <i class='bi-arrow-down-up'></i> </th>
+                                                <th class='emailSort changeMyImageOnSort' data-sorting="address">Address <i class='bi-arrow-down-up'> </th>
+                                                <th class='emailSort changeMyImageOnSort' data-sorting="email">Client email <i class='bi-arrow-down-up'> </th>
+                                                <th class='emailSort changeMyImageOnSort' data-sorting="phone">Client phone <i class='bi-arrow-down-up'> </th>
+                                                <th class='emailSort changeMyImageOnSort' data-sorting="total_amount">Total <i class='bi-arrow-down-up'> </th>
+                                                <th class='emailSort ' >PDF  </th>
+                                                <th class='emailSort ' >Mail  </th>
                                                 <th class='text-center'>Action</th>
                                             </tr>
                                         </thead>
@@ -207,32 +207,33 @@ if (!isset($_SESSION['email'])) {
 
                                         <div class="col-3">
                                             <label for="InvoiceAddId">Invoice no.</label>
-                                            <input type="text" id="InvoiceAddId" class="form-control" disabled>
+                                            <input type="text" id="InvoiceAddId" class="form-control" name="invoice_number" readonly >
                                         </div>
                                         <div class="col-3">
                                             <label for="InvoiceDateAddId">Invoice date</label>
-                                            <input type="text" id="InvoiceDateAddId" class="form-control" disabled>
+                                            <input type="text" id="InvoiceDateAddId" class="form-control" name="bill_date" readonly >
                                         </div>
 
                                     </div>
 
                                     <div class="row">
 
+                                        <input type="hidden" name="client_id" id="client_Id">
                                         <div class="col-3">
                                             <label for="clientAddId">Client name</label>
                                             <input type="text" id="clientAddId" class="form-control">
                                         </div>
                                         <div class="col-3">
                                             <label for="phoneAddId">Phone</label>
-                                            <input type="text" id="phoneAddId" class="form-control" disabled>
+                                            <input type="text" id="phoneAddId" class="form-control" readonly >
                                         </div>
                                         <div class="col-3">
                                             <label for="emailAddId">Email</label>
-                                            <input type="text" id="emailAddId" class="form-control" disabled>
+                                            <input type="text" id="emailAddId" class="form-control" readonly>
                                         </div>
                                         <div class="col-3">
                                             <label for="addressAddId">Address</label>
-                                            <input type="text" id="addressAddId" class="form-control" disabled>
+                                            <input type="text" id="addressAddId" class="form-control" readonly>
                                         </div>
 
                                     </div>
@@ -247,14 +248,15 @@ if (!isset($_SESSION['email'])) {
 
                                         <div class="row mb-4 duplicate-row">
 
+                                            <input type="hidden" class="item_id" name="item_id[]">
                                             <div class="col-3">
                                                 <label for="">Item name</label>
-                                                <input name="item_name[]" type="text" class="form-control itemAddId" id="itemAddId" onkeyup="getitems(this)">
+                                                <input name="item_name[]" type="text" class="form-control itemAddId"  onkeyup="getitems(this)">
                                                 <small class="no-item-found"></small>
                                             </div>
                                             <div class="col-3">
                                                 <label for="">Item price</label>
-                                                <input name="item_price[]" type="text" class="form-control itemPriceAddId" disabled>
+                                                <input name="item_price[]" type="text" class="form-control itemPriceAddId" readonly>
                                             </div>
                                             <div class="col-2">
                                                 <label for="">Quantity</label>
@@ -262,10 +264,10 @@ if (!isset($_SESSION['email'])) {
                                             </div>
                                             <div class="col-3">
                                                 <label for="">Amount</label>
-                                                <input name="total[]" type="text" class="form-control amountAddId" disabled>
+                                                <input name="total[]" type="text" class="form-control amountAddId" readonly>
                                             </div>
 
-                                            <div class="col-2 mt-4">
+                                            <div class="col-1 mt-4">
                                                 <button type="button" class="btn bg-danger delete-row"><i class="bi bi-trash text-light"></i></button>
                                             </div>
 
@@ -283,9 +285,9 @@ if (!isset($_SESSION['email'])) {
                                         <div class="col-6 mt-4">
                                             <button type="button" class="btn bg-success text-light cloned-item-btn">Add item</button>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-6 ">
                                             <label for="totalAmount">Total Amount:</label>
-                                            <input type="text" placeholder="Total Amount" class="form-control" id="totalAmount" disabled>
+                                            <input type="text" placeholder="Total Amount" class="form-control" id="totalAmount" readonly>
                                         </div>
 
                                     </div>
@@ -294,14 +296,14 @@ if (!isset($_SESSION['email'])) {
                                     
                                 </div>
 
-                                <button type="button" class="btn bg-primary text-light mt-4" id="item-master-submit-btn">Add Invoice</button>
-                                <button type="button" class="btn bg-primary text-light mt-4" id="item-master-update-btn" name="update-btn" style="display: none;">Update Invoice</button>
+                                <button type="button" class="btn bg-primary text-light mt-4" id="invoice-master-submit-btn">Add Invoice</button>
+                                <button type="button" class="btn bg-primary text-light mt-4" id="invoice-master-update-btn" name="update-btn" style="display: none;">Update Invoice</button>
 
 
                             </form>
 
                             <div class="Form-submition-success-message">
-                                <div class="alert alert-success" role="alert">
+                                <div class="alert alert-danger" role="alert">
 
                                 </div>
                             </div>

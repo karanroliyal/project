@@ -241,7 +241,7 @@ $(document).ready(function () {
     })
 
 
-    // Deleting User
+    // Deleting client
     $(document).on("click", ".user-delete-btn", function () {
         let myId = $(this).attr("id");
         console.log(myId);
@@ -263,7 +263,7 @@ $(document).ready(function () {
     });
 
 
-    // Edit User data
+    // Edit client data
     $(document).on("click", ".user-edit-btn", function () {
 
         let myId = $(this).attr("id");

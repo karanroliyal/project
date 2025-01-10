@@ -23,11 +23,10 @@ if (isset($_POST['pageignation_number'])) {
 // Live search ID
 $id = "";
 
-if(isset($_POST['id'])){
-    if(empty($_POST['id'])){
+if (isset($_POST['id'])) {
+    if (empty($_POST['id'])) {
         $id = "";
-    }
-    else{
+    } else {
         $id = $_POST['id'];
     }
 }
@@ -35,11 +34,10 @@ if(isset($_POST['id'])){
 // Live search Name
 $name = "";
 
-if(isset($_POST['name'])){
-    if(empty($_POST['name'])){
+if (isset($_POST['name'])) {
+    if (empty($_POST['name'])) {
         $name = "";
-    }
-    else{
+    } else {
         $name = $_POST['name'];
     }
 }
@@ -47,11 +45,10 @@ if(isset($_POST['name'])){
 // Live search phone
 $phone = "";
 
-if(isset($_POST['phone'])){
-    if(empty($_POST['phone'])){
+if (isset($_POST['phone'])) {
+    if (empty($_POST['phone'])) {
         $phone = "";
-    }
-    else{
+    } else {
         $phone = $_POST['phone'];
     }
 }
@@ -59,11 +56,10 @@ if(isset($_POST['phone'])){
 // Live search email
 $email = "";
 
-if(isset($_POST['email'])){
-    if(empty($_POST['email'])){
+if (isset($_POST['email'])) {
+    if (empty($_POST['email'])) {
         $email = "";
-    }
-    else{
+    } else {
         $email = $_POST['email'];
     }
 }
@@ -71,17 +67,19 @@ if(isset($_POST['email'])){
 // sorting form data 
 $sortId = "";
 
-if(isset($_POST['sortOn'])){
-    if(empty($_POST['sortOn'])){
+if (isset($_POST['sortOn'])) {
+    if (empty($_POST['sortOn'])) {
         $sortId = "";
-    }
-    else{
+    } else {
         $sortId = "order by {$_POST['sortOn']} {$_POST['sortType']}";
     }
 }
 
 // Offset of data
 $offset = ($current_page - 1) * $limit;
+
+
+
 
 
 

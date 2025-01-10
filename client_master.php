@@ -253,7 +253,6 @@ if (!isset($_SESSION['email'])) {
 
                             <div class="Form-submition-success-message">
                                 <div class="alert alert-success" role="alert">
-
                                 </div>
                             </div>
 

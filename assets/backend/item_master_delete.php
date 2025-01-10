@@ -7,9 +7,9 @@ if(isset($_POST['id'])){
     $sql = "Delete from item_master where id = {$_POST['id']}";
 
     if($conn->query($sql)){
-        echo $conn->error;
-    }else{
         echo "Deleted successfully";
+    }else{
+        echo $conn->error;
     }
 
 
