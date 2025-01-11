@@ -6,7 +6,28 @@ if(isset($_POST['str'])){
 
     include "connection.php";
 
-    $sql = "Select * from item_master where item_name like '%{$_POST['str']}%'";
+    $strId = "";
+
+    if(isset($_POST['arrId'])){
+
+        $arrId = $_POST['arrId'];
+    
+        $strId = implode(" ," ,$arrId);
+    
+        // echo $strId;
+    
+        if(empty(trim($strId))){
+            $strId = "";
+        }
+        else{
+            $strId = "AND id NOT IN ($strId)";
+        }
+
+    }
+
+
+
+    $sql = "Select * from item_master where item_name like '%{$_POST['str']}%' $strId ;";
 
     $result = $conn->query($sql);
 
@@ -20,11 +41,11 @@ if(isset($_POST['str'])){
 
         }
 
-        echo json_encode(['object' => $object]);
+        echo json_encode(['object' => $object , 'query' => $sql]);
 
     }
     else{
-        echo 0 ;
+        echo 0;
     }
 
 }

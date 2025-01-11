@@ -54,8 +54,8 @@ if (!isset($_SESSION['email'])) {
                 <!-- <h3>User master</h3> -->
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Invoice</button>
-                        <button class="nav-link" id="nav-profile-tab" onclick="generateInvoiceNumber()" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add Invoice</button>
+                        <button class="nav-link active" id="nav-home-tab" onclick="{removeCloneOnHome() , emptyForm()}" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Invoice</button>
+                        <button class="nav-link" id="nav-profile-tab" onclick="{generateInvoiceNumber() , dateGet()}" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Add Invoice</button>
 
                     </div>
                 </nav>
@@ -204,14 +204,14 @@ if (!isset($_SESSION['email'])) {
                                 <div class="client-detail-container mb-4">
 
                                     <div class="row mb-3">
-
+                                        <input type="hidden" class="invoice_id_for_upadte" name="invoice_update_id">
                                         <div class="col-3">
                                             <label for="InvoiceAddId">Invoice no.</label>
-                                            <input type="text" id="InvoiceAddId" class="form-control" name="invoice_number" readonly >
+                                            <input type="text" id="InvoiceAddId" class="form-control  " name="invoice_number" readonly  >
                                         </div>
                                         <div class="col-3">
                                             <label for="InvoiceDateAddId">Invoice date</label>
-                                            <input type="text" id="InvoiceDateAddId" class="form-control" name="bill_date" readonly >
+                                            <input type="text" id="InvoiceDateAddId" class="form-control  " name="bill_date" readonly >
                                         </div>
 
                                     </div>
@@ -225,15 +225,15 @@ if (!isset($_SESSION['email'])) {
                                         </div>
                                         <div class="col-3">
                                             <label for="phoneAddId">Phone</label>
-                                            <input type="text" id="phoneAddId" class="form-control" readonly >
+                                            <input type="text" id="phoneAddId" class="form-control  " readonly >
                                         </div>
                                         <div class="col-3">
                                             <label for="emailAddId">Email</label>
-                                            <input type="text" id="emailAddId" class="form-control" readonly>
+                                            <input type="text" id="emailAddId" class="form-control  " readonly>
                                         </div>
                                         <div class="col-3">
                                             <label for="addressAddId">Address</label>
-                                            <input type="text" id="addressAddId" class="form-control" readonly>
+                                            <input type="text" id="addressAddId" class="form-control  " readonly>
                                         </div>
 
                                     </div>
@@ -260,11 +260,11 @@ if (!isset($_SESSION['email'])) {
                                             </div>
                                             <div class="col-2">
                                                 <label for="">Quantity</label>
-                                                <input name="item_quantity[]" type="number" class="form-control quantityAddId" min=1 >
+                                                <input name="item_quantity[]" type="number" class="form-control quantityAddId text-end" min=1 >
                                             </div>
                                             <div class="col-3">
                                                 <label for="">Amount</label>
-                                                <input name="total[]" type="text" class="form-control amountAddId" readonly>
+                                                <input name="total[]" type="text" class="form-control amountAddId  " readonly>
                                             </div>
 
                                             <div class="col-1 mt-4">
@@ -287,7 +287,7 @@ if (!isset($_SESSION['email'])) {
                                         </div>
                                         <div class="col-6 ">
                                             <label for="totalAmount">Total Amount:</label>
-                                            <input type="text" placeholder="Total Amount" class="form-control" id="totalAmount" readonly>
+                                            <input type="text"  class="form-control  " placeholder="Total Amount" id="totalAmount" readonly>
                                         </div>
 
                                     </div>
@@ -297,7 +297,7 @@ if (!isset($_SESSION['email'])) {
                                 </div>
 
                                 <button type="button" class="btn bg-primary text-light mt-4" id="invoice-master-submit-btn">Add Invoice</button>
-                                <button type="button" class="btn bg-primary text-light mt-4" id="invoice-master-update-btn" name="update-btn" style="display: none;">Update Invoice</button>
+                                <button type="button" class="btn bg-primary text-light mt-4" id="invoice-master-update-btn" name="update-btn" style="display: none;" onclick="updateInvoice()" >Update Invoice</button>
 
 
                             </form>

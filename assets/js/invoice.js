@@ -5,7 +5,6 @@ $(document).ready(function () {
     // Make button selected on UI
     $(".sidebar-btn:nth-child(5)").addClass("click");
 
-
     //get invoice table data from database
 
     function getInvoiceData() {
@@ -43,7 +42,7 @@ $(document).ready(function () {
 
     let clientAutoComplete = [];
 
-    // Initialize autocomplete only once
+    // Initialize autocomplete for client master
     $("#clientAddId").autocomplete({
         source: function (request, response) {
             let value = request.term; // `term` is the query the user is typing
@@ -84,16 +83,6 @@ $(document).ready(function () {
     });
 
 
-    // show the date in Invoice date
-    $("#nav-profile-tab").on('click', function () {
-
-        let d = new Date();
-        $("#InvoiceDateAddId").val(`${(d.getDate()) > 9 ? d.getDate() : "0" + d.getDate()}/${d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)}/${d.getFullYear()}`);
-
-    })
-
-
-
     // Total amount of each item
     $(document).on('input', ".quantityAddId", function () {
 
@@ -121,11 +110,6 @@ $(document).ready(function () {
 
     }
 
-    
-
-
-    
-
     // delete item rows
 
     $(document).on('click', '.code-container .duplicate-row .delete-row', function () {
@@ -138,7 +122,6 @@ $(document).ready(function () {
         }
 
     })
-
 
 
     // Limit the number of record
@@ -301,8 +284,11 @@ $(document).ready(function () {
             data: { id: myId },
             success: function (data) {
                 data = JSON.parse(data);
+
+                console.log(data);
                 let cl = data.clientData;
                 let it = data.itemdata;
+                let count = data.count - 1;
                 console.log(data);
                 $("#InvoiceAddId").val(cl.invoice_number);
                 $("#client_Id").val(cl.client_id);
@@ -310,43 +296,60 @@ $(document).ready(function () {
                 $("#phoneAddId").val(cl.phone);
                 $("#emailAddId").val(cl.email);
                 $("#addressAddId").val(cl.address);
+                $(".invoice_id_for_upadte").val(myId);
 
-                for (let i = 1; i < it.count; i++) {
 
-                    console.log("hello 5")
-
-                    // let value = "";
+                for (let i = 0; i < count; i++) {
                     cloneItems();
-                    // let prnt = $(".client-detail-container-item");
-                    // let trFrstChild = prnt.find("div.duplicate-row:first-child");
-                    // let cloneChild = trFrstChild.clone();
-                    // cloneChild.find("input[type='text'] , input[type='number']").val('');
-                    // let appendedTo = prnt.find("div.code-container").append(cloneChild);
-
                 }
+                dateGet();
+                for (let i = 0; i < count + 1; i++) {
+                    $('.itemAddId').eq(i).val(it[i].item_name);
+                    $('.item_id').eq(i).val(it[i].item_id);
+                    $('.itemPriceAddId').eq(i).val(it[i].item_price);
+                    $('.quantityAddId').eq(i).val(it[i].quantity);
+                    $('.amountAddId').eq(i).val(it[i].amount);
+                }
+
+                $("#totalAmount").val(cl.total_amount);
 
                 $("#invoice-master-submit-btn").hide();
                 $("#invoice-master-update-btn").show();
+
             },
         });
 
 
     });
 
-    // form empty when click on nav-home-tab
+    // empty all things if item name is not there 
 
-    $(document).on('click', "#nav-home-tab", function () {
+    $(document).on('input', '.itemAddId', function () {
 
-        $("#addInvoiceFormData").trigger("reset");
+        let value = $(this).val().trim();
 
-        
+        if (value == "") {
+            // console.log("empty")
+            $(this).parents('.duplicate-row').find(".itemPriceAddId").val("");
+            $(this).parents('.duplicate-row').find(".item_id").val("");
+            $(this).parents('.duplicate-row').find(".quantityAddId").val("");
+            $(this).parents('.duplicate-row').find(".amountAddId").val("");
+            calculateTotalAmount();
+        }
 
     })
 
 
-
-
 })
+
+
+
+
+// form empty when click on nav-home-tab
+
+function emptyForm() {
+    $("#addInvoiceFormData").trigger("reset");
+}
 
 
 // item name get from auto-complete
@@ -356,12 +359,31 @@ let itemAutoComplete = [];
 function getitems(e) {
     $('.itemAddId').autocomplete({
         source: function (request, response) {
-            let value = request.term; // `term` is the query the user is typing
+            let value = request.term;
+
+            let idArr = [];
+
+            $(".item_id").each(function () {
+
+                if (!$(this).val() == "") {
+
+                    idArr.push($(this).val());
+
+                }
+
+
+            })
+
+            let newSet = new Set(idArr);
+
+            idArr = [...newSet];
+
+            console.log(idArr);
 
             $.ajax({
                 url: "assets/backend/item_master_autocomplete.php",
                 type: "POST",
-                data: { str: value },
+                data: { str: value, arrId: idArr },
                 success: function (data) {
                     // console.log(data);
                     if (data == 0) {
@@ -371,6 +393,8 @@ function getitems(e) {
                     else {
                         data = JSON.parse(data);
                         itemAutoComplete = [];
+
+                        console.log(data.query);
 
                         let myArr = data.object;
 
@@ -393,6 +417,7 @@ function getitems(e) {
 
             $(this).parents('.duplicate-row').find(".itemPriceAddId").val(ui.item.price);
             $(this).parents('.duplicate-row').find(".item_id").val(ui.item.id);
+            
         }
     });
 
@@ -419,7 +444,7 @@ function generateInvoiceNumber() {
 
 // cloning the item form
 
-function cloneItems(){
+function cloneItems() {
 
     let value = "";
 
@@ -429,3 +454,71 @@ function cloneItems(){
     cloneChild.find("input[type='text'] , input[type='number']").val('');
     let appendedTo = prnt.find("div.code-container").append(cloneChild);
 }
+
+// get date on click 
+function dateGet() {
+    let d = new Date();
+    $("#InvoiceDateAddId").val(`${(d.getDate()) > 9 ? d.getDate() : "0" + d.getDate()}/${d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)}/${d.getFullYear()}`);
+}
+
+
+
+// remove clone items on click of all invoice 
+
+function removeCloneOnHome() {
+    console.log("delete")
+
+    $(".delete-row").trigger('click');
+
+}
+
+// update invoice 
+
+function updateInvoice() {
+
+    console.log("upadte");
+
+    let formData = new FormData(addInvoiceFormData);
+
+    
+
+    $.ajax({
+
+        url: "assets/backend/invoice_update.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            console.log(data);
+            if (data == "success") {
+
+                $("#addInvoiceFormData").trigger("reset");
+                let change = $("#nav-home-tab");
+
+                let tab = new bootstrap.Tab(change);
+                tab.show();
+                getInvoiceData();
+
+            }
+            else if (data == "required") {
+
+                $(".Form-submition-success-message .alert-danger").text(
+                    "Please fill all fields"
+                );
+                $(".Form-submition-success-message").slideDown("slow");
+                setTimeout(function () {
+                    $(".Form-submition-success-message").slideUp("slow");
+                }, 4000);
+
+            }
+        }
+
+    })
+
+}
+
+
+
+
+
