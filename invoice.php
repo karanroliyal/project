@@ -283,7 +283,7 @@ if (!isset($_SESSION['email'])) {
 
 
                                         <div class="col-6 mt-4">
-                                            <button type="button" class="btn bg-success text-light cloned-item-btn">Add item</button>
+                                            <button type="button" onclick="cloneItems()" class="btn bg-success text-light cloned-item-btn">Add item</button>
                                         </div>
                                         <div class="col-6 ">
                                             <label for="totalAmount">Total Amount:</label>

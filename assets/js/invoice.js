@@ -121,19 +121,10 @@ $(document).ready(function () {
 
     }
 
-    // cloning the item form
+    
 
-    $('.cloned-item-btn').click(function () {
 
-        let value = "";
-
-        let prnt = $(".client-detail-container-item");
-        let trFrstChild = prnt.find("div.duplicate-row:first-child");
-        let cloneChild = trFrstChild.clone();
-        cloneChild.find("input[type='text'] , input[type='number']").val('');
-        let appendedTo = prnt.find("div.code-container").append(cloneChild);
-
-    });
+    
 
     // delete item rows
 
@@ -324,13 +315,13 @@ $(document).ready(function () {
 
                     console.log("hello 5")
 
-                    let value = "";
-
-                    let prnt = $(".client-detail-container-item");
-                    let trFrstChild = prnt.find("div.duplicate-row:first-child");
-                    let cloneChild = trFrstChild.clone();
-                    cloneChild.find("input[type='text'] , input[type='number']").val('');
-                    let appendedTo = prnt.find("div.code-container").append(cloneChild);
+                    // let value = "";
+                    cloneItems();
+                    // let prnt = $(".client-detail-container-item");
+                    // let trFrstChild = prnt.find("div.duplicate-row:first-child");
+                    // let cloneChild = trFrstChild.clone();
+                    // cloneChild.find("input[type='text'] , input[type='number']").val('');
+                    // let appendedTo = prnt.find("div.code-container").append(cloneChild);
 
                 }
 
@@ -423,4 +414,18 @@ function generateInvoiceNumber() {
 
     })
 
+}
+
+
+// cloning the item form
+
+function cloneItems(){
+
+    let value = "";
+
+    let prnt = $(".client-detail-container-item");
+    let trFrstChild = prnt.find("div.duplicate-row:first-child");
+    let cloneChild = trFrstChild.clone();
+    cloneChild.find("input[type='text'] , input[type='number']").val('');
+    let appendedTo = prnt.find("div.code-container").append(cloneChild);
 }
