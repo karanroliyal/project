@@ -337,6 +337,10 @@ $(document).ready(function () {
             calculateTotalAmount();
         }
 
+        $(this).parents('.duplicate-row').find(".itemPriceAddId").trigger("change");
+
+
+
     })
 
 
@@ -466,8 +470,6 @@ function dateGet() {
 // remove clone items on click of all invoice 
 
 function removeCloneOnHome() {
-    console.log("delete")
-
     $(".delete-row").trigger('click');
 
 }
