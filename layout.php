@@ -1,27 +1,10 @@
 <?php
-session_start();
 
-if (!isset($_SESSION['email'])) {
-    header("location:login.php");
-    exit;
-}
+$title = "Layout";
 
-// echo "Welcome to our website {$_SESSION['email']}";
+include_once "header.php";
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <script src="assets/js/jquery.js"></script>
-    <title>Layout</title>
-</head>
-
-<body>
 
 
 
@@ -55,8 +38,8 @@ if (!isset($_SESSION['email'])) {
 
 
 
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/layout.js"></script>
-</body>
-
-</html>
+    <?php
+    
+    include_once "footer.php";
+    
+    ?>

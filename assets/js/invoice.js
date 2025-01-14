@@ -34,7 +34,7 @@ $(document).ready(function () {
     $(".reset-btn").click(function () {
 
         $("input").val("");
-
+        getInvoiceData();
 
     })
 
@@ -88,7 +88,7 @@ $(document).ready(function () {
 
         let price = $(this).parents(".duplicate-row").find('.itemPriceAddId').val();
 
-        let amount = parseFloat($(this).parents(".duplicate-row").find(".amountAddId").val($(this).val() * price));
+        let amount = $(this).parents(".duplicate-row").find(".amountAddId").val(parseFloat($(this).val() * price).toFixed(2));
 
         // Update total amount dynamically whenever the quantity is updated
         calculateTotalAmount();
@@ -104,6 +104,7 @@ $(document).ready(function () {
             let amount = parseFloat($(this).val()) || 0; // Parse and default to 0 if empty
             totalAmount += amount;
         });
+
 
         // Update totalAmount field
         $("#totalAmount").val(totalAmount.toFixed(2));
@@ -337,11 +338,35 @@ $(document).ready(function () {
             calculateTotalAmount();
         }
 
-        $(this).parents('.duplicate-row').find(".itemPriceAddId").trigger("change");
-
-
 
     })
+
+    // PDF invoice ajax call
+
+    // $(document).on('click', ".bi-file-earmark-pdf-fill", function () {
+
+    //     let valueID = $(this).attr("id");
+
+    //     console.log(valueID);
+
+    //     $.ajax({
+
+    //         url: "PDF.php",
+    //         data: { id: valueID },
+    //         type: "POST",
+    //         success: function (data) {
+    //             console.log(data);
+    //             // $(".pdf_data").html(data);
+    //             // window.location.href = "http://localhost/project/INVOICE_PDF.php";
+    //         }
+
+    //     })
+
+
+    // })
+
+
+    
 
 
 })
@@ -418,10 +443,9 @@ function getitems(e) {
             });
         },
         select: function (event, ui) {
-
             $(this).parents('.duplicate-row').find(".itemPriceAddId").val(ui.item.price);
             $(this).parents('.duplicate-row').find(".item_id").val(ui.item.id);
-            
+            $(".quantityAddId").trigger("input");
         }
     });
 
@@ -482,7 +506,7 @@ function updateInvoice() {
 
     let formData = new FormData(addInvoiceFormData);
 
-    
+
 
     $.ajax({
 
@@ -519,6 +543,8 @@ function updateInvoice() {
     })
 
 }
+
+
 
 
 

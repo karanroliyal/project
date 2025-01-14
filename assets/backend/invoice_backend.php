@@ -71,8 +71,8 @@ if ($result->num_rows > 0) {
                         <td>{$row['email']}</td>
                         <td>{$row['phone']}</td>
                         <td>₹{$row['total_amount']}</td>
-                        <td><i class='bi bi-file-earmark-pdf-fill text-danger'></i></td>
-                        <td><i class='bi bi-envelope-fill text-primary'></i></td>
+                        <td ><a href='INVOICE_PDF.php?my_id={$row['invoice_id']}' ><i class='bi bi-file-earmark-pdf-fill text-danger'></i></a></td>
+                        <td ><i class='bi bi-envelope-fill text-primary'></i></td>
                         <td class='action-td'>
                         <button class='btn bg-primary invoice-edit-btn rounded-circle' id='{$row['invoice_id']}'><i class='bi bi-pencil-square text-light'></i></button>
                         <button class='btn bg-danger invoice-delete-btn rounded-circle' id='{$row['invoice_id']}'><i class='bi bi-trash text-light'></i></button>
@@ -89,7 +89,7 @@ if ($result->num_rows > 0) {
 count(*) numbers
 FROM invoice_master im
 JOIN client_master cm 
-ON im.client_id = cm.id where invoice_number like '%{$_POST['invoice_no']}%' and NAME like '%{$_POST['cl_name']}%' and phone like '%{$_POST['cl_phone']}%' and cm.email like '%{$_POST['cl_email']}%' ;";
+ON im.client_id = cm.id where invoice_number like '%{$_POST['invoice_no']}%' and NAME like '%{$_POST['cl_name']}%' and phone like '%{$_POST['cl_phone']}%' and cm.email like '%{$_POST['cl_email']}%'and invoice_date like '%{$_POST['bill_date']}%' ;";
 
     $result2 = $conn->query($sql2);
 

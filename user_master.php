@@ -1,33 +1,11 @@
 <?php
-session_start();
 
-if (!isset($_SESSION['email'])) {
-    header("location:login.php");
-    exit;
-}
+$title = "User Master";
 
-// echo "Welcome to our website {$_SESSION['email']}";
+include_once "header.php";
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="assets/js/jquery.js"></script>
-    <title>User Master</title>
-</head>
-
-<body>
-
-    <!-- <h1>I am layout</h1>
-
-    <a id="logout-btn" href="logout.php" >Logout</a> -->
 
 
     <div class="layout-wrapper">
@@ -219,8 +197,10 @@ if (!isset($_SESSION['email'])) {
 
 
     <script src="assets/js/user_master.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/layout.js"></script>
-</body>
 
-</html>
+    
+    <?php
+    
+    include_once "footer.php";
+    
+    ?>
