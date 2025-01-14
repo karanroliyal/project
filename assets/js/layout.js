@@ -126,3 +126,9 @@ $(document).ready(function () {
 
 
 });
+
+function hideSideBar(){
+
+  $(".sidebar-wrapper").toggle("slide", { direction: "left" }, 1000);
+
+}

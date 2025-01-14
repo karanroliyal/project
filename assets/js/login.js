@@ -62,7 +62,7 @@ $(document).ready(function () {
                             Login Successfully !
                         </div>`);
                         $("#login_form").trigger("reset");
-                        window.location.href="user_master.php";
+                        window.location.href="dashboard.php";
                     }
                     else{
                         $("#alert-message").html(`<div class='alert alert-danger' role='alert'>

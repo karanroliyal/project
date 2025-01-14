@@ -1,11 +1,14 @@
 <?php
 
+use Spipu\Html2Pdf\Tag\Html\Em;
+
 include_once 'assets/backend/connection.php';
 
+$id = $_GET['my_id'];
 
 $sql = "SELECT * FROM invoice_master im
         JOIN client_master cm 
-        ON im.client_id = cm.id WHERE im.invoice_id = {$_GET['my_id']};";
+        ON im.client_id = cm.id WHERE im.invoice_id = $id;";
 
 
 
@@ -129,7 +132,7 @@ if ($result->num_rows > 0) {
         <h3>Name: <span class='values'>{$row['NAME']}</span></h3>
                 <h3 class='mt-2'>Address: <span class='values'>{$row['address']}</span></h3>
                 <h3 class='mt-2'>Date: <span class='values'>{$row['invoice_date']}</span></h3>
-                <h3 class='mt-2'>Client ID: <span class='values'>{$row['id']}</span></h3>";
+                <h3 class='mt-2'>Phone: <span class='values'>{$row['phone']}</span></h3>";
 
 
                 $html .= "<hr>
@@ -179,6 +182,10 @@ if ($result->num_rows > 0) {
                         }
                     
                     
+                    }else{
+                        $html .="<td>
+                            <h4>No item is there</h4>
+                        </td>";
                     }
             $html .= " </table> <hr>
 
@@ -215,5 +222,11 @@ $html2pdf = new Html2Pdf();
 $html2pdf->setDefaultFont($font);
 ob_start();
 $html2pdf->writeHTML($html);
-$file = time() . '.pdf';
-$html2pdf->output($file);
+$file = __DIR__ . "/pdfs/"."generated_pdf_".$id . '.pdf';
+$html2pdf->output($file , 'F');
+$html2pdf->output($file , 'I');
+
+
+?>
+
+

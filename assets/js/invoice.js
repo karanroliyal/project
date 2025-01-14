@@ -341,37 +341,53 @@ $(document).ready(function () {
 
     })
 
-    // PDF invoice ajax call
+    // Mail data setting 
+    $(document).on('click', '.bi-envelope-fill', function () {
 
-    // $(document).on('click', ".bi-file-earmark-pdf-fill", function () {
+        $(this).parents('td').siblings('td').find(".bi-file-earmark-pdf-fill").trigger('click');
+        $("#mailForm").trigger("reset");
+        $(".mail-send").hide();
+        $(".mail-fail").hide();
 
-    //     let valueID = $(this).attr("id");
+        let valId = $(this).attr("id");
 
-    //     console.log(valueID);
+        console.log(valId);
 
-    //     $.ajax({
+        $.ajax({
 
-    //         url: "PDF.php",
-    //         data: { id: valueID },
-    //         type: "POST",
-    //         success: function (data) {
-    //             console.log(data);
-    //             // $(".pdf_data").html(data);
-    //             // window.location.href = "http://localhost/project/INVOICE_PDF.php";
-    //         }
+            url: "assets/backend/mailData.php",
+            type: "POST",
+            data: { id: valId },
+            success: function (data) {
+                data = JSON.parse(data);
+                let email = data.dataSet.email;
+                let name = data.dataSet.NAME;
+                let invoice_id = data.dataSet.invoice_id;
+                $("#recipient-name").val(name);
+                $("#recipient-email").val(email);
+                $("#invoice_id_hidden").val(invoice_id);
+            }
 
-    //     })
+        })
 
-
-    // })
-
-
-    
-
+    })
 
 })
 
+// empty all things if client name is not there 
 
+function emptyClient(){
+
+    let value = $("#clientAddId").val();
+
+    if(value == ""){
+        $("#phoneAddId").val("");
+        $("#client_Id").val("");
+        $("#emailAddId").val("");
+        $("#addressAddId").val("");
+    }
+
+}
 
 
 // form empty when click on nav-home-tab
@@ -489,8 +505,6 @@ function dateGet() {
     $("#InvoiceDateAddId").val(`${(d.getDate()) > 9 ? d.getDate() : "0" + d.getDate()}/${d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)}/${d.getFullYear()}`);
 }
 
-
-
 // remove clone items on click of all invoice 
 
 function removeCloneOnHome() {
@@ -544,6 +558,50 @@ function updateInvoice() {
 
 }
 
+// Mail sending 
+function mailSend() {
+
+    let recipient_name = $("#recipient-name").val();
+
+    let formData = new FormData(mailForm);
+
+    let invoiceId = $("#invoice_id_hidden").val();
+
+    var pdfFilePath = 'pdfs/generated_pdf_' + invoiceId + '.pdf';
+
+    formData.append("pdf_file_path", pdfFilePath);
+
+    $.ajax({
+
+        url: "assets/backend/Mail.php",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function () {
+            $(".mail-btn-container").html(`<div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>`);
+        },
+        success: function (data) {
+            if (data == "success") {
+                $(".mail-fail").slideUp("slow");
+                $(".mail-send").text("Mail sended successfully to " + recipient_name).slideDown("slow");
+                $(".mail-btn-container").html(`<button type="button" class="btn btn-primary mail-send-btn" onclick="mailSend()">Send message</button>`)
+                $("#message-text").val('');
+                $("#subject").val('');
+                $("#formFile").val('');
+            }
+            else {
+                $(".mail-send").slideUp("slow");
+                $(".mail-fail").text(data).slideDown("slow");
+                $(".mail-btn-container").html(`<button type="button" class="btn btn-primary mail-send-btn" onclick="mailSend()">Send message</button>`)
+            }
+        }
+
+    })
+
+}
 
 
 

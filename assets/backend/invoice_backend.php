@@ -71,8 +71,8 @@ if ($result->num_rows > 0) {
                         <td>{$row['email']}</td>
                         <td>{$row['phone']}</td>
                         <td>₹{$row['total_amount']}</td>
-                        <td ><a href='INVOICE_PDF.php?my_id={$row['invoice_id']}' ><i class='bi bi-file-earmark-pdf-fill text-danger'></i></a></td>
-                        <td ><i class='bi bi-envelope-fill text-primary'></i></td>
+                        <td ><a href='INVOICE_PDF.php?my_id={$row['invoice_id']}' target='_blank' ><i class='bi bi-file-earmark-pdf-fill text-danger'></i></a></td>
+                        <td ><i data-bs-toggle='modal' id='{$row['invoice_id']}' data-bs-target='#exampleModal' data-bs-whatever='@fat' class='bi bi-envelope-fill text-primary'></i></td>
                         <td class='action-td'>
                         <button class='btn bg-primary invoice-edit-btn rounded-circle' id='{$row['invoice_id']}'><i class='bi bi-pencil-square text-light'></i></button>
                         <button class='btn bg-danger invoice-delete-btn rounded-circle' id='{$row['invoice_id']}'><i class='bi bi-trash text-light'></i></button>

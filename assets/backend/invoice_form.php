@@ -59,7 +59,7 @@ if (isset($_POST)) {
 
             for ($i = 0; $i < count($itemIds); $i++) {
 
-                if (!empty($itemIds[$i]) &&  !empty($quantities[$i]) && !empty($itemNames[$i])) {
+                if (!empty($itemIds[$i]) &&  !empty($quantities[$i]) && $quantities[$i]!=0 && !empty($itemNames[$i])) {
 
                     $amount = $prices[$i] * $quantities[$i];
 
