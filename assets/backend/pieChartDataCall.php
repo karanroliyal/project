@@ -52,9 +52,7 @@ $invoice_total = $row4['total'];
 $sql = " SELECT   im.item_name, im.item_price ,SUM(i.quantity) quantity , SUM(i.amount) total
  FROM item_master im 
  JOIN invoice i 
- ON im.id = i.item_id 
- JOIN invoice_master inm
- ON inm.invoice_id = i.invoice_id
+ ON im.id = i.item_id
  GROUP BY item_name;";
 
 $linedata = $conn->query($sql);
