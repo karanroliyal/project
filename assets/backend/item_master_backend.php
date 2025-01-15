@@ -98,20 +98,51 @@ if ($result->num_rows > 0) {
     // Number of pages 
     $pages = ceil($total_records / $limit);
 
-    $ulData .= "<ul class='my-pagination'>";
+    // trying new pagination
 
+    // Calculate the range of pages to show
+    $max_visible_pages = 3; // Maximum number of pages to display
+    $start_page = max(1, $current_page - 1); // Ensure that the page doesn't go below 1
+    $end_page = min($pages, $current_page + 1); // Ensure that the page doesn't exceed the total number of pages
 
-    for ($i = 1; $i <= $pages; $i++) {
-
-        if ($i == $current_page) {
-            $class = 'active-page';
-        } else {
-            $class = '';
+    // If there are fewer than $max_visible_pages, adjust the start and end pages
+    if ($pages <= $max_visible_pages) {
+        $start_page = 1;
+        $end_page = $pages;
+    } else {
+        // Ensure that the range includes at least 3 pages, adjusting for edge cases
+        if ($current_page == 1) {
+            $end_page = min($max_visible_pages, $pages);
+        } elseif ($current_page == $pages) {
+            $start_page = max(1, $pages - $max_visible_pages + 1);
         }
-        $ulData .=  "<li id='{$i}' class='{$class}' >{$i}</li>";
     }
 
-    $ulData .= "</ul>";
+    // Generate pagination buttons with a range of 3 pages
+    $ulData = "<nav aria-label='Page navigation example'  >
+    <ul class='pagination my-pagination' id='{$pages}'>
+        <li class='page-item'>
+            <a class='page-link prev'  aria-label='Previous'>
+                <span aria-hidden='true'>&laquo;</span>
+            </a>
+        </li>";
+
+    // Show previous pages and current page
+    for ($i = $start_page; $i <= $end_page; $i++) {
+        $class = ($i == $current_page) ? 'active' : '';
+        $ulData .= "<li id='{$i}' class='page-item li $class'><a class='page-link'>$i</a></li>";
+    }
+
+    // Show next pages if there are more
+    $ulData .= "
+    <li class='page-item'>
+        <a class='page-link next'  aria-label='Next'>
+            <span aria-hidden='true'>&raquo;</span>
+        </a>
+    </li>
+    </ul>
+</nav>";
+
 
     // send the html for table and pagination
     echo json_encode(['table' => $tableData, 'pagination' => $ulData]);

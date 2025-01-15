@@ -110,9 +110,6 @@ if(isset($_POST['item_name'])){
 
 
 
-
-
-
 $submitSuccess = "";
 
 if (empty($emptyArr) && empty($validationArr) && empty($duplicateItem)) {

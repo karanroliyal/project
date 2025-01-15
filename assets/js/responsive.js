@@ -1,68 +1,20 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    // Make button selected on UI
-    $(".sidebar-btn:nth-child(1)").addClass("click");
 
-    // Pie chart data
-    function chartData(){
+
+    function dataReceveived() {
         $.ajax({
             url: "assets/backend/pieChartDataCall.php",
             type: "POST",
-            success: function(data){
+            success: function (data) {
                 data = JSON.parse(data);
-
-                // Update the DOM with the returned data
-                $(".user-number").text(data.user);
-                $(".item-number").text(data.item);
-                $(".invoice-number").text(data.invoice);
-                $(".client-number").text(data.client);
-                $(".invoice-total").text(data.total);
-                // data for line chart let itemData = data.lineData;
                 let itemData = data.lineData;
-                
-                // pie chart with the updated data
-                createPieChart(data.user, data.item, data.invoice, data.client);
-                // line chart with the updated data
                 lineChart(itemData);
-
             }
         })
     }
+    dataReceveived();
 
-    // Function to create the pie chart
-    function createPieChart(user, item, invoice, client) {
-        var chartsPie = document.querySelectorAll(".chart-pie");
-        
-        chartsPie.forEach(function(chart) {
-            if (!chart.getAttribute('data-chart-initialized')) {
-                new Chart(chart, {
-                    type: "pie",
-                    data: {
-                        labels: ["Users", "Item", "Client", "Invoice"],
-                        datasets: [{
-                            data: [user, item, client, invoice],  // Use the updated values here
-                            backgroundColor: [
-                                "#007bff", // Primary color (blue)
-                                "#ffcc00", // Warning color (yellow)
-                                "#dc3545",  // Danger color (red)
-                                "#198754", // Success color (green)
-                            ],
-                            borderWidth: 5
-                        }]
-                    },
-                    options: {
-                        responsive: !window.MSInputMethodContext,
-                        maintainAspectRatio: false,
-                        legend: {
-                            display: false
-                        },
-                        cutoutPercentage: 100
-                    }
-                });
-                chart.setAttribute("data-chart-initialized", "true");
-            }
-        });
-    }
 
     function lineChart(itemData) {
 
@@ -143,7 +95,9 @@ $(document).ready(function(){
 
     }
 
-    // Call the chartData function to load the data and render the chart
-    chartData();
 
-});
+
+
+})
+
+

@@ -231,11 +231,11 @@ include_once "header.php";
 
                                 <div class="row mb-3">
                                     <input type="hidden" class="invoice_id_for_upadte" name="invoice_update_id">
-                                    <div class="col-3">
+                                    <div class="col-md-3 col-xl-3 col-sm-6 col-xs-6">
                                         <label for="InvoiceAddId">Invoice no.</label>
                                         <input type="text" id="InvoiceAddId" class="form-control  " name="invoice_number" readonly>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-md-3 col-xl-3 col-sm-6 col-xs-6">
                                         <label for="InvoiceDateAddId">Invoice date</label>
                                         <input type="text" id="InvoiceDateAddId" class="form-control  " name="bill_date" readonly>
                                     </div>
@@ -245,19 +245,19 @@ include_once "header.php";
                                 <div class="row">
 
                                     <input type="hidden" name="client_id" id="client_Id">
-                                    <div class="col-3">
+                                    <div class="col-md-3  col-sm-6 ">
                                         <label for="clientAddId">Client name</label>
                                         <input type="text" id="clientAddId" oninput="emptyClient()" class="form-control">
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-md-3  col-sm-6 ">
                                         <label for="phoneAddId">Phone</label>
                                         <input type="text" id="phoneAddId" class="form-control  " readonly>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-md-3  col-sm-6 ">
                                         <label for="emailAddId">Email</label>
                                         <input type="text" id="emailAddId" class="form-control  " readonly>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-md-3  col-sm-6 ">
                                         <label for="addressAddId">Address</label>
                                         <input type="text" id="addressAddId" class="form-control  " readonly>
                                     </div>
@@ -275,20 +275,20 @@ include_once "header.php";
                                     <div class="row mb-4 duplicate-row">
 
                                         <input type="hidden" class="item_id" name="item_id[]">
-                                        <div class="col-3">
+                                        <div class="col-md-3  col-sm-6 ">
                                             <label for="">Item name</label>
                                             <input name="item_name[]" type="text" class="form-control itemAddId" onkeyup="getitems(this)">
                                             <small class="no-item-found"></small>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-md-3  col-sm-6 ">
                                             <label for="">Item price</label>
                                             <input name="item_price[]" type="text" class="form-control itemPriceAddId" readonly>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-md-2 col-sm-6 ">
                                             <label for="">Quantity</label>
                                             <input name="item_quantity[]" type="number" class="form-control quantityAddId text-end" min=1>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-md-3  col-sm-6 ">
                                             <label for="">Amount</label>
                                             <input name="total[]" type="text" class="form-control amountAddId  " readonly>
                                         </div>

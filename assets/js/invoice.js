@@ -134,7 +134,7 @@ $(document).ready(function () {
     });
 
     // giving the value of current page to show record according to it
-    $(document).on("click", ".my-pagination li", function () {
+    $(document).on("click", ".my-pagination .li", function () {
         let page = $(this).attr("id");
 
         $("#pageId").val(page);
@@ -142,6 +142,33 @@ $(document).ready(function () {
         console.log(page);
         getInvoiceData();
     });
+
+    // next button pagination
+    $(document).on('click', '.next', function () {
+
+        let page = $(this).parents('.my-pagination').find('.active').attr('id');
+        let totalPage = $(".my-pagination").attr("id");
+        console.log(totalPage)
+        page = Number(page) + 1;
+        if (page <= totalPage) {
+            $("#pageId").val(page);
+            getInvoiceData();
+        }
+
+    })
+
+    // previous button pagination
+    $(document).on('click', '.prev', function () {
+
+        let page = $(this).parents('.my-pagination').find('.active').attr('id');
+        page = Number(page) - 1;
+        console.log(page)
+        if(page>0){
+            $("#pageId").val(page);
+            getInvoiceData();
+        }
+
+    })
 
     // Reset the search fields
     $("#reset-btn").click(function () {
@@ -376,11 +403,11 @@ $(document).ready(function () {
 
 // empty all things if client name is not there 
 
-function emptyClient(){
+function emptyClient() {
 
     let value = $("#clientAddId").val();
 
-    if(value == ""){
+    if (value == "") {
         $("#phoneAddId").val("");
         $("#client_Id").val("");
         $("#emailAddId").val("");
@@ -567,7 +594,7 @@ function mailSend() {
 
     let invoiceId = $("#invoice_id_hidden").val();
 
-    var pdfFilePath = 'pdfs/generated_pdf_' + invoiceId + '.pdf';
+    let pdfFilePath = 'pdfs/generated_pdf_' + invoiceId + '.pdf';
 
     formData.append("pdf_file_path", pdfFilePath);
 
@@ -591,6 +618,14 @@ function mailSend() {
                 $("#message-text").val('');
                 $("#subject").val('');
                 $("#formFile").val('');
+                $.ajax({
+                    url: "assets/backend/cleanPdfs.php",
+                    type: "POST",
+                    data: { pdfPath: pdfFilePath },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                })
             }
             else {
                 $(".mail-send").slideUp("slow");

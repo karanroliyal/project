@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     // reset search fileds 
 
-    $(".reset-btn").click(function(){
+    $(".reset-btn").click(function () {
 
         $("input").val("");
         getFormData();
@@ -44,7 +44,7 @@ $(document).ready(function () {
     });
 
     // giving the value of current page to show record according to it
-    $(document).on("click", ".my-pagination li", function () {
+    $(document).on("click", ".my-pagination .li", function () {
         let page = $(this).attr("id");
 
         $("#pageId").val(page);
@@ -52,6 +52,33 @@ $(document).ready(function () {
         console.log(page);
         getFormData();
     });
+
+    // next button pagination
+    $(document).on('click', '.next', function () {
+
+        let page = $(this).parents('.my-pagination').find('.active').attr('id');
+        let totalPage = $(".my-pagination").attr("id");
+        console.log(totalPage)
+        page = Number(page) + 1;
+        if (page <= totalPage) {
+            $("#pageId").val(page);
+            getFormData();
+        }
+
+    })
+
+    // previous button pagination
+    $(document).on('click', '.prev', function () {
+
+        let page = $(this).parents('.my-pagination').find('.active').attr('id');
+        page = Number(page) - 1;
+        console.log(page)
+        if(page>0){
+            $("#pageId").val(page);
+            getFormData();
+        }
+
+    })
 
     // Reset the search fields
     $("#reset-btn").click(function () {
@@ -410,7 +437,7 @@ $(document).ready(function () {
 
     });
 
-   // loading table and clearing form fields when clicking on home page
+    // loading table and clearing form fields when clicking on home page
     $("#nav-home-tab").on("click", function () {
 
         getFormData();

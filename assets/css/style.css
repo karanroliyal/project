@@ -9,7 +9,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 2px;
 }
 
 /* Track */
@@ -280,6 +280,7 @@ body {
         justify-content: space-around;
         gap: 30px;
         align-items: end;
+        flex-wrap: wrap;
     }
 
     .all-users-data-table {
@@ -301,27 +302,10 @@ body {
             }
 
             .my-pagination {
-                display: flex;
-                padding: 0px;
-                gap: 2px;
-                margin: 0px;
+                
 
                 li {
-                    list-style: none;
-                    width: 30px;
-                    height: 30px;
-                    border: 0.1px solid #606061;
-                    text-align: center;
-                    border-radius: 3px;
-                    background-color: white;
-                    color: black;
                     cursor: pointer;
-                }
-
-                .active-page {
-                    background-color: rgb(13 110 253);
-                    border-color: rgb(13 110 253);
-                    color: white;
                 }
 
             }

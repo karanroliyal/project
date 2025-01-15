@@ -4,13 +4,13 @@ $(document).ready(function () {
 
   // reset search fileds 
 
-  $(".reset-btn").click(function(){
+  $(".reset-btn").click(function () {
 
     $(".live-search-inputs input").val("");
-   
-      loadTable();
 
-})
+    loadTable();
+
+  })
 
   // getting table data
   function loadTable(limit, page, sId, sname_, sphone, semail, Sort, sortOn) {
@@ -54,7 +54,7 @@ $(document).ready(function () {
   });
 
   // giving the value of current page to show record according to it
-  $(document).on("click", ".my-pagination li", function () {
+  $(document).on("click", ".my-pagination .li", function () {
     let page = $(this).attr("id");
     let id = $("#idId").val();
     let name_ = $("#nameId").val();
@@ -67,6 +67,48 @@ $(document).ready(function () {
     console.log(page);
     loadTable(limit, page, id, name_, phone, email);
   });
+
+
+// next button pagination
+$(document).on('click', '.next', function () {
+
+  let page = $(this).parents('.my-pagination').find('.active').attr('id');
+  let totalPage = $(".my-pagination").attr("id");
+  console.log(totalPage)
+  page = Number(page) + 1;
+  if (page <= totalPage) {
+      $("#pageId").val(page);
+      let id = $("#idId").val();
+    let name_ = $("#nameId").val();
+    let phone = $("#phoneId").val();
+    let email = $("#emailId").val();
+    let limit = $("#limitData").val();
+    loadTable(limit, page, id, name_, phone, email);
+  }
+
+})
+
+// previous button pagination
+$(document).on('click', '.prev', function () {
+
+  let page = $(this).parents('.my-pagination').find('.active').attr('id');
+  page = Number(page) - 1;
+  console.log(page)
+  if(page>0){
+      $("#pageId").val(page);
+      let id = $("#idId").val();
+    let name_ = $("#nameId").val();
+    let phone = $("#phoneId").val();
+    let email = $("#emailId").val();
+    let limit = $("#limitData").val();
+    loadTable(limit, page, id, name_, phone, email);
+  }
+
+})
+
+
+
+
 
   // Reset the search fields
   $("#reset-btn").click(function () {
@@ -353,9 +395,6 @@ $(document).ready(function () {
 
   })
 
-
-
-
   // User master form submission
 
   $("#user-master-submit-btn").on("click", function () {
@@ -444,9 +483,6 @@ $(document).ready(function () {
       });
     }
   });
-
-
-
 
 
 });
