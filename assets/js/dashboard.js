@@ -86,7 +86,8 @@ $(document).ready(function(){
                 // Line chart
                 new Chart(ctx, {
                     type: "line",
-                    data: {labels: itemData.map(ele => {
+                    data: {
+                        labels: itemData.map(ele => {
                             return ele.item_name
                         }),
                         datasets: [{
