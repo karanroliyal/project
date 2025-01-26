@@ -122,6 +122,10 @@ $(document).ready(function(){
                                 reverse: false,  // Reverse the order of the x-axis
                                 grid: {
                                     color: "rgba(0,0,0,0.0)"  // Hide the x-axis grid lines
+                                },
+                                title: {
+                                    display: true,
+                                    text: "Items",
                                 }
                             },
                             y: {
@@ -132,6 +136,10 @@ $(document).ready(function(){
                                 grid: {
                                     color: "rgba(0,0,0,0.0)",  // Hide the y-axis grid lines
                                     borderDash: [3, 3]
+                                },
+                                title: {
+                                    display: true,
+                                    text: "Price (Rs)",
                                 }
                             }
                         }
